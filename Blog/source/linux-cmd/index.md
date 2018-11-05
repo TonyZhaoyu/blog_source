@@ -157,8 +157,10 @@ $ git revert HEAD
 $ git revert commit [commit No.]
 ```
 
-* How to untract a folder but keep the folder on your disk.
+* How to un-track a folder but keep the folder on your disk.
 Link: https://stackoverflow.com/questions/24290358/remove-a-folder-from-git-tracking
+
+This also works for the situation where an unwanted submodule causing fatal error when 'git add'. The basic idea is to remove the folder from git's cache. 
 
 1. Add the folder to the .gitignore
 2. Remove the folder from your local git tracking, but keep it on your disk.
