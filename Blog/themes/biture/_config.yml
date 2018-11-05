@@ -14,6 +14,7 @@ menu:
      TLPI: /linux-p-int/
   Linux:
      Shell commands: /linux-cmd/
+     Kernel review: /kernel-rev/
   Leetcode:
   IoT notes:
      SDK review: /sdk-review/
