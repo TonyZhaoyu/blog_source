@@ -1,2 +1,1 @@
-# pics
-Pics used in blog.
+Source materials used in blog.
