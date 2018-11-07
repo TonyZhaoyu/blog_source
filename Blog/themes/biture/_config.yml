@@ -1,6 +1,6 @@
 # Header
 menu:
-  C/C++:
+  C/C++ Apps:
      Code expt - Tcp Socket: /tcp-sock/
      Code expt - Console Interaction: /cli-int/
      Code expt - Embedded-ADT: /embed-adt/
@@ -14,7 +14,8 @@ menu:
      TLPI: /linux-p-int/
   Linux:
      Shell commands: /linux-cmd/
-     Kernel review: /kernel-rev/
+     Kernel rev - typeof: /kernel-rev-typeof/
+     Kernel rev - rbTree: /kernel-rev-rbtree/
   Leetcode:
   IoT notes:
      SDK review: /sdk-review/
