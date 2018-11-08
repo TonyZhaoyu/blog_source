@@ -1,5 +1,5 @@
 ---
-title: Notes for The element of computing systems (i.e.,) nand2tetris
+title: Notes for The element of computing systems (i.e., nand2tetris)
 date: 2018-08-14 17:01:04
 ---
 
