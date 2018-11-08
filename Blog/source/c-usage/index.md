@@ -1,5 +1,5 @@
 ---
-title: Commonly used C techniques
+title: Techniques in C and compiler
 date: 2018-08-13 11:52:06
 ---
 

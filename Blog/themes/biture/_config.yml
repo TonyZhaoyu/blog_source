@@ -1,13 +1,13 @@
 # Header
 menu:
-  C/C++ Apps:
-     Code expt - Tcp Socket: /tcp-sock/
-     Code expt - Console Interaction: /cli-int/
-     Code expt - Embedded-ADT: /embed-adt/
-     Code expt - cmocka explore: /cmocka-exp/
-     Code rev - paho.mqtt.c: /paho-mqtt-c-notes/
-     Code sum - tricks: /c-usage/
-     Code sum - basics: /c-basics/
+  C Apps:
+     Expt - Tcp Socket: /tcp-sock/
+     Expt - Console Interaction: /cli-int/
+     Expt - Embedded-ADT: /embed-adt/
+     Expt - Cmocka explore: /cmocka-exp/
+     Rev - Paho.mqtt.c: /paho-mqtt-c-notes/
+     C_Tricks: /c-usage/
+     C_Basics: /c-basics/
   Book notes:
      PSICC2: /psicc2-notes/
      Nand2Tetris: /nand2tetris/

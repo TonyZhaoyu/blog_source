@@ -1,5 +1,5 @@
 ---
-title: Basics in C/C++ programming
+title: Basics in C programming
 date: 2018-09-04 12:11:42
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Firmware 101
+title:
 ---
 
 ![Beaglebone black layout](http://www.element14.com/community/servlet/JiveServlet/showImage/2-84952-167466/bbb-top-white.png)
