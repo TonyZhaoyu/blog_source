@@ -180,7 +180,138 @@ static inline void rb_link_node(struct rb_node *node, struct rb_node *parent,
 }
 ```
 
-The method rb_link_node() assign a copy of the parent color with the format of *unsigned long*. The type-casting line (i.e., *node->__rb_parent_color = (unsigned long)parent;*) could be considered as an up-cast, as the initial member of rb_node structure is __rb_parent_color. When reading rb_insert_color(), we could see at the beginning a method, namely *rb_red_parent()* is called. As the new node is initially colored in red (not necessarily store the value in RAM), and hence such a function is called. It could be interpreted like getting the parent from the new red node, and basically it does a downcast.
+The method rb_link_node() store a copy of the parent ptr with the format of *unsigned long*. When reading rb_insert_color(), we could see at the beginning a method, namely *rb_red_parent()* is called. As the new node is initially colored in red (not necessarily store the value in RAM), and hence the function's name could be interpreted like getting the parent from the new red node. The insertion code is duplicated below for reading convenience:
+
+```c
+static __always_inline void
+__rb_insert(struct rb_node *node, struct rb_root *root,
+	    void (*augment_rotate)(struct rb_node *old, struct rb_node *new))
+{
+	struct rb_node *parent = rb_red_parent(node), *gparent, *tmp;
+
+	while (true) {
+		/*
+		 * Loop invariant: node is red
+		 *
+		 * If there is a black parent, we are done.
+		 * Otherwise, take some corrective action as we don't
+		 * want a red root or two consecutive red nodes.
+		 */
+		if (!parent) {
+			rb_set_parent_color(node, NULL, RB_BLACK);
+			break;
+		} else if (rb_is_black(parent))
+			break;
+
+		gparent = rb_red_parent(parent);
+
+		tmp = gparent->rb_right;
+		if (parent != tmp) {	/* parent == gparent->rb_left */
+			if (tmp && rb_is_red(tmp)) {
+				/*
+				 * Case 1 - color flips
+				 *
+				 *       G            g
+				 *      / \          / \
+				 *     p   u  -->   P   U
+				 *    /            /
+				 *   n            n
+				 *
+				 * However, since g's parent might be red, and
+				 * 4) does not allow this, we need to recurse
+				 * at g.
+				 */
+				rb_set_parent_color(tmp, gparent, RB_BLACK);
+				rb_set_parent_color(parent, gparent, RB_BLACK);
+				node = gparent;
+				parent = rb_parent(node);
+				rb_set_parent_color(node, parent, RB_RED);
+				continue;
+			}
+
+			tmp = parent->rb_right;
+			if (node == tmp) {
+				/*
+				 * Case 2 - left rotate at parent
+				 *
+				 *      G             G
+				 *     / \           / \
+				 *    p   U  -->    n   U
+				 *     \           /
+				 *      n         p
+				 *
+				 * This still leaves us in violation of 4), the
+				 * continuation into Case 3 will fix that.
+				 */
+				tmp = node->rb_left;
+				WRITE_ONCE(parent->rb_right, tmp);
+				WRITE_ONCE(node->rb_left, parent);
+				if (tmp)
+					rb_set_parent_color(tmp, parent,
+							    RB_BLACK);
+				rb_set_parent_color(parent, node, RB_RED);
+				augment_rotate(parent, node);
+				parent = node;
+				tmp = node->rb_right;
+			}
+
+			/*
+			 * Case 3 - right rotate at gparent
+			 *
+			 *        G           P
+			 *       / \         / \
+			 *      p   U  -->  n   g
+			 *     /                 \
+			 *    n                   U
+			 */
+			WRITE_ONCE(gparent->rb_left, tmp); /* == parent->rb_right */
+			WRITE_ONCE(parent->rb_right, gparent);
+			if (tmp)
+				rb_set_parent_color(tmp, gparent, RB_BLACK);
+			__rb_rotate_set_parents(gparent, parent, root, RB_RED);
+			augment_rotate(gparent, parent);
+			break;
+		} else {
+			tmp = gparent->rb_left;
+			if (tmp && rb_is_red(tmp)) {
+				/* Case 1 - color flips */
+				rb_set_parent_color(tmp, gparent, RB_BLACK);
+				rb_set_parent_color(parent, gparent, RB_BLACK);
+				node = gparent;
+				parent = rb_parent(node);
+				rb_set_parent_color(node, parent, RB_RED);
+				continue;
+			}
+
+			tmp = parent->rb_left;
+			if (node == tmp) {
+				/* Case 2 - right rotate at parent */
+				tmp = node->rb_right;
+				WRITE_ONCE(parent->rb_left, tmp);
+				WRITE_ONCE(node->rb_right, parent);
+				if (tmp)
+					rb_set_parent_color(tmp, parent,
+							    RB_BLACK);
+				rb_set_parent_color(parent, node, RB_RED);
+				augment_rotate(parent, node);
+				parent = node;
+				tmp = node->rb_left;
+			}
+
+			/* Case 3 - left rotate at gparent */
+			WRITE_ONCE(gparent->rb_right, tmp); /* == parent->rb_left */
+			WRITE_ONCE(parent->rb_left, gparent);
+			if (tmp)
+				rb_set_parent_color(tmp, gparent, RB_BLACK);
+			__rb_rotate_set_parents(gparent, parent, root, RB_RED);
+			augment_rotate(gparent, parent);
+			break;
+		}
+	}
+}
+```
+
+Here are some notes on the insertion *__rb_insert()* method. Conditions from line 15 to line 19 determine whether the new node is a root node or its parent is a black node. Since adding a red node under a parent in black will suffice all invariants, the loop should end. Next, as the new node's parent is a red node, so we need to know the color of grandparent to perform recoloring and rotating. The line "gparent = rb_red_parent(parent)" is destined to find a valid grandparent (i.e., not NULL), as a child node in red of a red parent always has a black grandparent, and this step should never be reached if a red node to be inserted to a black parent. Now we need to know if the parent is a left child a the grandparent by the conditions in line 24 (rb_left) and line 89 (rb_right).
 
 The kernel implementation also provides removing and replacing functions. One could basically search for the node and call rb_erase() or rb_replace_node() to achieve removing and replacing respectively. Examples are omitted.
 
