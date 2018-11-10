@@ -317,7 +317,7 @@ Here are some notes on the insertion *__rb_insert()* method. Conditions from lin
 
 1. The new node's uncle is red in line 25, since "gparent->rb_right" is the uncle not the parent.
 2. The new node's uncle is black and it is the right child in line 48.
-3. The new node's uncle is black and it is the left child. 
+3. The new node's uncle is black and it is the left child.
 
 ---
 
