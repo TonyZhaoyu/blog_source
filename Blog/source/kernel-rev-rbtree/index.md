@@ -31,7 +31,7 @@ The rbTree is a kind of self-balancing binary search tree with the following res
 
 It is a binary search tree (BST for short), and hence it allows efficient in-order-traversal and standard BST insertion. For example, the result of inserting node (int No.10) to a tree with only a root node (int No.8) is a tree with root node (int No.8) and its right child node (int No.10).
 
-* **Why using rbTree instead of BST?**
+* **Why using rbTree over BST?**
 
 The following example shows the difference of two trees (red nodes in rbTree are encapsulated with *[]*). BST on the left shows the height of 4, while rbTree on the right shows the height of 3.
 
@@ -47,11 +47,13 @@ The following example shows the difference of two trees (red nodes in rbTree are
 
 ```
 
-It's easy to derive tree operations (e.g., search, max, min, insert, delete, etc) for BST take O(n) time where n is the height of the BST, and for rbTree take O(logn) time where n is the number of nodes. From the example we could see that the big-O time for BST is O(4) while for rbTree is O(2).
+It's easy to derive tree operations (e.g., search, max, min, insert, delete, etc) for BST take O(n) time where n is the height of the BST, and for rbTree take O(logn) time where n is the number of nodes. From the example we could see that the big-O time for BST is O(4) while for rbTree is O(2). This proves that since rbTree has a bounded O(logN) complexity, it is better than BST which has a worst-case O(N) complexity.
 
 * **Where has rbTree been used in the Linux kernel?**
 
 > There are a number of red-black trees in use in the kernel. The deadline and CFQ I/O schedulers employ rbtrees to track requests; the packet CD/DVD driver does the same. The high-resolution timer code uses an rbtree to organize outstanding timer requests. The ext3 filesystem tracks directory entries in a red-black tree. Virtual memory areas (VMAs) are tracked with red-black trees, as are epoll file descriptors, cryptographic keys, and network packets in the “hierarchical token bucket” scheduler.
+
+Another usage is the task scheduler of Linux kernel. Here's an interesting read: https://developer.ibm.com/tutorials/l-completely-fair-scheduler/.
 
 * **A practical example of tree insertion.**
 
@@ -180,7 +182,7 @@ static inline void rb_link_node(struct rb_node *node, struct rb_node *parent,
 }
 ```
 
-The method rb_link_node() store a copy of the parent ptr with the format of *unsigned long*. When reading rb_insert_color(), we could see at the beginning a method, namely *rb_red_parent()* is called. As the new node is initially colored in red (not necessarily store the value in RAM), and hence the function's name could be interpreted like getting the parent from the new red node. The insertion code is duplicated below for reading convenience:
+The method rb_link_node() store a copy of the parent ptr with the format of *unsigned long*. When reading rb_insert_color(), we could see at the beginning a method, namely *rb_red_parent()* is called. As the new node is initially colored in red (not necessarily store the value in RAM), and hence the function's name could be interpreted like getting the parent from the new red node. The kernel implementation also provides removing and replacing functions. One could basically search for the node and call rb_erase() or rb_replace_node() to achieve removing and replacing respectively. Examples of erasing and replacing are omitted. Hereby, we take a closer look at the insertion and deletion. The insertion code is duplicated below for reading convenience:
 
 ```c
 static __always_inline void
@@ -311,9 +313,11 @@ __rb_insert(struct rb_node *node, struct rb_root *root,
 }
 ```
 
-Here are some notes on the insertion *__rb_insert()* method. Conditions from line 15 to line 19 determine whether the new node is a root node or its parent is a black node. Since adding a red node under a parent in black will suffice all invariants, the loop should end. Next, as the new node's parent is a red node, so we need to know the color of grandparent to perform recoloring and rotating. The line "gparent = rb_red_parent(parent)" is destined to find a valid grandparent (i.e., not NULL), as a child node in red of a red parent always has a black grandparent, and this step should never be reached if a red node to be inserted to a black parent. Now we need to know if the parent is a left child a the grandparent by the conditions in line 24 (rb_left) and line 89 (rb_right).
+Here are some notes on the insertion *__rb_insert()* method. Conditions from line 15 to line 19 determine whether the new node is a root node or its parent is a black node. Since adding a red node under a parent in black will suffice all invariants, the loop should end. Next, as the new node's parent is a red node, so we need to know the color of grandparent to perform recoloring and rotating. The line "gparent = rb_red_parent(parent)" is destined to find a valid grandparent (i.e., not NULL), as a child node in red of a red parent always has a black grandparent, and this step should never be reached if a red node to be inserted to a black parent. Now we need to know if the parent is a left child a the grandparent by the conditions in line 24 (rb_left) and line 89 (rb_right). Next, there are three sub-cases under the condition of line 24, and they are: 
 
-The kernel implementation also provides removing and replacing functions. One could basically search for the node and call rb_erase() or rb_replace_node() to achieve removing and replacing respectively. Examples are omitted.
+1. The new node's uncle is red in line 25, since "gparent->rb_right" is the uncle not the parent.
+2. The new node's uncle is black and it is the right child in line 48.
+3. The new node's uncle is black and it is the left child.
 
 ---
 
