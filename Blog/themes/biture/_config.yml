@@ -16,6 +16,7 @@ menu:
      Shell commands: /linux-cmd/
      Kernel rev - typeof: /kernel-rev-typeof/
      Kernel rev - rbTree: /kernel-rev-rbtree/
+     Kernel rev - hashtable: /kernel-rev-hashtable/
   Leetcode:
   IoT notes:
      SDK review: /sdk-review/
