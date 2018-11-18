@@ -227,3 +227,13 @@ For example, all the shared library and the test file are in the same folder.
 ```bash
 $ gcc -Wall test_basics.c -o test -L./ -lcmocka -Wl,-rpath=./
 ```
+
+***
+
+#### **When const meets volatile**
+
+
+***
+
+#### **Bit manipulation**
+
