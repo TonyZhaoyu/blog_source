@@ -232,6 +232,64 @@ $ gcc -Wall test_basics.c -o test -L./ -lcmocka -Wl,-rpath=./
 
 #### **When const meets volatile**
 
+The topic is elaborated using three sections: *const* usage, *volatile* usage and the mixture of *const* and *volatile* usage.
+
+When speaking of *const*, we could spontaneously relate to *read-only*. And it is true that a variable that is marked by const should not be changed elsewhere other than its definition. An example could be `const char *str = "Hello World!"`. However, there are some human-compilation tests regarding const, in which a few statements with const are to be validated. Considering the following cases:
+
+```c
+int a = 8;
+// A pointer.
+int *b = &a;
+// A pointer to a const value.
+const int *c = &a;
+int const *d = b;
+// A const pointer to value.
+int * const e = &a;
+// A const pointer to a const value.
+const int * const f = &a;
+```
+
+c, d and f will be illegal if the value of a is to be changed. c and d is legal to change the pointer to another pointer e.g., `int i = 3; c = &i;`, and such a change is illegal for f. It is legal for e to change the value of a, e.g., `a = 10;`. But it would be illegal for f to do pointer change like e.g., `int j = 9; f = &j;`. The const qualifier could also be used for non-pointer values. The following lines are perfectly legal, `int const a = 8; const int *b = &a;`.
+
+The usage of *volatile* qualifier is compiler related. Basically, it prevents the compiler from optimizing away the memory read/write operations to the volatile variable. The syntax of using volatile is just like const. Considering the pointer situation, the most common use case is `volatile int *a = &b;` or `int volatile *a = &b`, indicating a pointer to a volatile variable. Volatile pointers to a non-volatile data is rare. There are three cases that will use volatile qualifier (refer to https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword):
+
+1. Memory-mapped peripheral registers
+
+2. Global variables modified by an interrupt service routine
+
+3. Global variables accessed by multiple tasks within a multi-threaded application.
+
+A good example of the first case is as below:
+
+```c
+// Situation 1: non volatile memory read.
+uint8_t * p_reg = (uint8_t *) 0x1234;
+
+do { // Some code. } while (0 == *p_reg);
+
+// Assembly
+  mov p_reg, #0x1234
+  mov a, @p_reg
+loop:
+  # Some code.
+  bz loop
+```
+
+```c
+// Situation 2: volatile memory read.
+uint8_t volatile * p_reg = (uint8_t *) 0x1234;
+
+do { // Some code. } while (0 == *p_reg);
+
+// Assembly
+  mov p_reg, #0x1234
+loop:
+  # Some code.
+  mov a, @p_reg
+  bz loop
+```
+
+When `combining const and volatile`, we might wonder whether the definition of `const volatile int *a = &b` is legal? In terms of a read-only memory-map register, it is perfectly legal, e.g., `const volatile uint_8 *a = (uint8_t *)0x8000000A`. *const* limits access to the variable to be read-only. *volatile* force the compiler to be aware of this variable that should be read from the memory-mapped register every single time.
 
 ***
 
