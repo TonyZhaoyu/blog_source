@@ -289,9 +289,56 @@ loop:
   bz loop
 ```
 
-When `combining const and volatile`, we might wonder whether the definition of `const volatile int *a = &b` is legal? In terms of a read-only memory-map register, it is perfectly legal, e.g., `const volatile uint_8 *a = (uint8_t *)0x8000000A`. *const* limits access to the variable to be read-only. *volatile* force the compiler to be aware of this variable that should be read from the memory-mapped register every single time.
+When `combining const and volatile`, we might wonder whether the definition of `const volatile int *a = &b` is legal? In terms of a read-only memory-map register, it is perfectly legal, e.g., `const volatile uint_8 *a = (uint8_t *)0x8000000A`. *const* limits the access to the variable to be read-only. *volatile* forces the compiler to be aware of this variable that should be read from the memory-mapped register every single time.
 
 ***
 
 #### **Bit manipulation**
 
+Bit manipulations are full of tricks. In some cases, it decrease an algorithm's complexity from O(logN) down to O(1). A good reference could be the book Hacker's Delight. Here are some examples from this link: https://www.hackerearth.com/zh/practice/notes/bit-manipulation/.
+
+1. How to check if the given number is power of 2?
+
+The tricks is this method `n & (n - 1) == 0`. Basically it flips the bit of the right side of the rightmost 1, e.g., `n = (110)b; n - 1 = (101)b`, or flips the rightmost 1 if it's the last bit.
+
+2. Count the number of ones in the binary representation of the given number.
+
+Based on the first trick, we could know that `n & (n - 1)` could count the number of ones, as each time it mange to detect a one-bit. The following is a sample implementation:
+
+```c
+uint16_t one_count(int n)
+{
+  uint16_t cnt = 0;
+
+  while (n) {
+    n = n & (n - 1);
+    cnt++;
+  }
+
+  return cnt;
+}
+```
+
+3. Check if the i-th bit is set in the binary form of the given number.
+
+This one is easy. Use this condition `N & (1 << i)`, where N is the given number for the i-th bit.
+
+4. Set the specific bit and read the specific bit of a register.
+
+Read the specific bit could use the same condition in 3, i.e., `N & (1 << i)`. We could set or clear a specific bit using the following conditions respectively: `N = N | (1 << i)` and `N = N & (~(1 << i))`.
+
+5. How to generate all the possible subsets of a set?
+
+Considering a consecutive memory of a set, like an static array or dynamic array. We could use index to find each set element. We could use bit 1 to represent the presence of an element, and 0 to represent the absence of an element. Like a state machine in truth-table, we traverse through all the possibilities (e.g., a set of 3 elements has 8 possibility (000)b, (001)b etc) and print the element with 1 bit.
+
+6. Detect which bit contains the leftmost one?
+
+This question may be challenging. My thought is to somehow set all the bit after the leftmost 1 (e.g., (0100)b => (0111)b), and count the number of ones until it reaches a zero. The final result is then the `count - 1`. The difficult part is set all the bit after the leftmost 1. To achieve this, we could use the following lines:
+
+```c
+// Notice an N is a 16-bit integer.
+N = N| (N>>1);
+N = N| (N>>2);
+N = N| (N>>4);
+N = N| (N>>8);
+```
