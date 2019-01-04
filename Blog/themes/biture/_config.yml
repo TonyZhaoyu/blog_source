@@ -12,6 +12,7 @@ menu:
      PSICC2: /psicc2-notes/
      Nand2Tetris: /nand2tetris/
      TLPI: /linux-p-int/
+     CSAPP: /csapp-notes/
   Linux:
      Shell commands: /linux-cmd/
      Kernel rev - typeof: /kernel-rev-typeof/

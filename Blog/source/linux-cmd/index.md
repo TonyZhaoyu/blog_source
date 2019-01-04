@@ -315,3 +315,14 @@ fi
 
 echo "This line will never be reached!"
 ```
+
+* Check if a long string contains a subString.
+
+Ref: https://stackoverflow.com/questions/229551/how-to-check-if-a-string-contains-a-substring-in-bash
+
+```bash
+string='My long string'
+if [[ $string == *"My long"* ]]; then
+  echo "It's there!"
+fi
+```
