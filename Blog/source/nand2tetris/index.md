@@ -5,9 +5,12 @@ date: 2018-08-14 17:01:04
 
 The article covers project1 ~ project2 or chapter 1 ~ chapter 6, which are fundamentals of computer architectures based on HDL (an hardware description language defined in the book). Course materials could refer to https://www.nand2tetris.org/course, and videos on Coursera. The goal for this article is to build a Hack computer based on simple combinational and sequential logic elements composed in HDL.
 
-HACK computer overview:(https://github.com/TonyZhaoyu/blog_source/blob/master/pics/HACK_computer.png)
-CPU interface:(https://github.com/TonyZhaoyu/blog_source/blob/master/pics/CPU_interface.png)
-CPU control/data path:(https://github.com/TonyZhaoyu/blog_source/blob/master/pics/CPU_path.png)
+HACK computer overview:
+<img src="https://github.com/TonyZhaoyu/blog_source/blob/master/pics/HACK_computer.png" width="400">
+CPU interface:
+<img src="https://github.com/TonyZhaoyu/blog_source/blob/master/pics/CPU_interface.png" width="400">
+CPU control/data path:
+<img src="https://github.com/TonyZhaoyu/blog_source/blob/master/pics/CPU_path.png" width="400">
 
 The code below is HDL implementation of project 1, 2, 3 and 5.
 
@@ -504,7 +507,10 @@ CHIP ALU {
     Add16 (a=outx, b=outy, out=outAdd);
     Mux16 (a=outAnd, b=outAdd, sel=f, out=outsel1);
     Not16 (in=outsel1, out=outsel2);
-    Mux16 (a=outsel1, b=outsel2, sel=no, out=out, out[15]=sign, out[15]=out15, out[14]=out14, out[13]=out13, out[12]=out12, out[11]=out11, out[10]=out10, out[9]=out9, out[8]=out8, out[7]=out7, out[6]=out6, out[5]=out5, out[4]=out4, out[3]=out3, out[2]=out2, out[1]=out1, out[0]=out0);
+    Mux16 (a=outsel1, b=outsel2, sel=no, out=out, out[15]=sign, out[15]=out15, out[14]=out14,
+           out[13]=out13, out[12]=out12, out[11]=out11, out[10]=out10, out[9]=out9, out[8]=out8,
+           out[7]=out7, out[6]=out6, out[5]=out5, out[4]=out4, out[3]=out3, out[2]=out2, out[1]=out1,
+           out[0]=out0);
     Or (a=sign, b=false, out=ng);
     Or (a=out0, b=out1, out=and1);
     Or (a=and1, b=out2, out=and2);
@@ -655,16 +661,34 @@ CHIP RAM4K {
 
     PARTS:
     // Put your code here:
-    DMux8Way (in=load, sel[2]=address[11], sel[1]=address[10], sel[0]=address[9], a=out1, b=out2, c=out3, d=out4, e=out5, f=out6, g=out7, h=out8);
-    RAM512 (in=in, load=out1, address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR1);
-    RAM512 (in=in, load=out2, address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR2);
-    RAM512 (in=in, load=out3, address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR3);
-    RAM512 (in=in, load=out4, address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR4);
-    RAM512 (in=in, load=out5, address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR5);
-    RAM512 (in=in, load=out6, address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR6);
-    RAM512 (in=in, load=out7, address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR7);
-    RAM512 (in=in, load=out8, address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR8);
-    Mux8Way16 (a=outR1, b=outR2, c=outR3, d=outR4, e=outR5, f=outR6, g=outR7, h=outR8, sel[2]=address[11], sel[1]=address[10], sel[0]=address[9], out=out);
+    DMux8Way (in=load, sel[2]=address[11], sel[1]=address[10], sel[0]=address[9],
+              a=out1, b=out2, c=out3, d=out4, e=out5, f=out6, g=out7, h=out8);
+    RAM512 (in=in, load=out1, address[8]=address[8], address[7]=address[7], address[6]=address[6],
+            address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2],
+            address[1]=address[1], address[0]=address[0], out=outR1);
+    RAM512 (in=in, load=out2, address[8]=address[8], address[7]=address[7], address[6]=address[6],
+            address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2],
+            address[1]=address[1], address[0]=address[0], out=outR2);
+    RAM512 (in=in, load=out3, address[8]=address[8], address[7]=address[7], address[6]=address[6],
+            address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2],
+            address[1]=address[1], address[0]=address[0], out=outR3);
+    RAM512 (in=in, load=out4, address[8]=address[8], address[7]=address[7], address[6]=address[6],
+            address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2],
+            address[1]=address[1], address[0]=address[0], out=outR4);
+    RAM512 (in=in, load=out5, address[8]=address[8], address[7]=address[7], address[6]=address[6],
+            address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2],
+            address[1]=address[1], address[0]=address[0], out=outR5);
+    RAM512 (in=in, load=out6, address[8]=address[8], address[7]=address[7], address[6]=address[6],
+            address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2],
+            address[1]=address[1], address[0]=address[0], out=outR6);
+    RAM512 (in=in, load=out7, address[8]=address[8], address[7]=address[7], address[6]=address[6],
+            address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2],
+            address[1]=address[1], address[0]=address[0], out=outR7);
+    RAM512 (in=in, load=out8, address[8]=address[8], address[7]=address[7], address[6]=address[6],
+            address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2],
+            address[1]=address[1], address[0]=address[0], out=outR8);
+    Mux8Way16 (a=outR1, b=outR2, c=outR3, d=outR4, e=outR5, f=outR6, g=outR7, h=outR8,
+               sel[2]=address[11], sel[1]=address[10], sel[0]=address[9], out=out);
 }
 
 // This file is part of www.nand2tetris.org
@@ -716,10 +740,22 @@ CHIP RAM16K {
     PARTS:
     // Put your code here:
     DMux4Way (in=load, sel[1]=address[13], sel[0]=address[12], a=out1, b=out2, c=out3, d=out4);
-    RAM4K (in=in, load=out1, address[11]=address[11], address[10]=address[10], address[9]=address[9], address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR1);
-    RAM4K (in=in, load=out2, address[11]=address[11], address[10]=address[10], address[9]=address[9], address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR2);
-    RAM4K (in=in, load=out3, address[11]=address[11], address[10]=address[10], address[9]=address[9], address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR3);
-    RAM4K (in=in, load=out4, address[11]=address[11], address[10]=address[10], address[9]=address[9], address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR4);
+    RAM4K (in=in, load=out1, address[11]=address[11], address[10]=address[10], address[9]=address[9],
+           address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5],
+           address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1],
+           address[0]=address[0], out=outR1);
+    RAM4K (in=in, load=out2, address[11]=address[11], address[10]=address[10], address[9]=address[9],
+           address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5],
+           address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1],
+           address[0]=address[0], out=outR2);
+    RAM4K (in=in, load=out3, address[11]=address[11], address[10]=address[10], address[9]=address[9],
+           address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5],
+           address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1],
+           address[0]=address[0], out=outR3);
+    RAM4K (in=in, load=out4, address[11]=address[11], address[10]=address[10], address[9]=address[9],
+           address[8]=address[8], address[7]=address[7], address[6]=address[6], address[5]=address[5],
+           address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1],
+           address[0]=address[0], out=outR4);
     Mux4Way16 (a=outR1, b=outR2, c=outR3, d=outR4, sel[1]=address[13], sel[0]=address[12], out=out);
 }
 
@@ -741,7 +777,8 @@ CHIP RAM64 {
 
     PARTS:
     // Put your code here:
-    DMux8Way (in=load, sel[2]=address[5], sel[1]=address[4], sel[0]=address[3], a=out1, b=out2, c=out3, d=out4, e=out5, f=out6, g=out7, h=out8);
+    DMux8Way (in=load, sel[2]=address[5], sel[1]=address[4], sel[0]=address[3], a=out1, b=out2, c=out3,
+              d=out4, e=out5, f=out6, g=out7, h=out8);
     RAM8 (in=in, load=out1, address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR1);
     RAM8 (in=in, load=out2, address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR2);
     RAM8 (in=in, load=out3, address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR3);
@@ -750,7 +787,8 @@ CHIP RAM64 {
     RAM8 (in=in, load=out6, address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR6);
     RAM8 (in=in, load=out7, address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR7);
     RAM8 (in=in, load=out8, address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR8);
-    Mux8Way16 (a=outR1, b=outR2, c=outR3, d=outR4, e=outR5, f=outR6, g=outR7, h=outR8, sel[2]=address[5], sel[1]=address[4], sel[0]=address[3], out=out);
+    Mux8Way16 (a=outR1, b=outR2, c=outR3, d=outR4, e=outR5, f=outR6, g=outR7, h=outR8, sel[2]=address[5],
+               sel[1]=address[4], sel[0]=address[3], out=out);
 }
 
 // This file is part of the materials accompanying the book
@@ -771,16 +809,26 @@ CHIP RAM512 {
 
     PARTS:
     // Put your code here:
-    DMux8Way (in=load, sel[2]=address[8], sel[1]=address[7], sel[0]=address[6], a=out1, b=out2, c=out3, d=out4, e=out5, f=out6, g=out7, h=out8);
-    RAM64 (in=in, load=out1, address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR1);
-    RAM64 (in=in, load=out2, address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR2);
-    RAM64 (in=in, load=out3, address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR3);
-    RAM64 (in=in, load=out4, address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR4);
-    RAM64 (in=in, load=out5, address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR5);
-    RAM64 (in=in, load=out6, address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR6);
-    RAM64 (in=in, load=out7, address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR7);
-    RAM64 (in=in, load=out8, address[5]=address[5], address[4]=address[4], address[3]=address[3], address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR8);
-    Mux8Way16 (a=outR1, b=outR2, c=outR3, d=outR4, e=outR5, f=outR6, g=outR7, h=outR8, sel[2]=address[8], sel[1]=address[7], sel[0]=address[6], out=out);
+    DMux8Way (in=load, sel[2]=address[8], sel[1]=address[7], sel[0]=address[6], a=out1, b=out2, c=out3,
+              d=out4, e=out5, f=out6, g=out7, h=out8);
+    RAM64 (in=in, load=out1, address[5]=address[5], address[4]=address[4], address[3]=address[3],
+           address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR1);
+    RAM64 (in=in, load=out2, address[5]=address[5], address[4]=address[4], address[3]=address[3],
+           address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR2);
+    RAM64 (in=in, load=out3, address[5]=address[5], address[4]=address[4], address[3]=address[3],
+           address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR3);
+    RAM64 (in=in, load=out4, address[5]=address[5], address[4]=address[4], address[3]=address[3],
+           address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR4);
+    RAM64 (in=in, load=out5, address[5]=address[5], address[4]=address[4], address[3]=address[3],
+           address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR5);
+    RAM64 (in=in, load=out6, address[5]=address[5], address[4]=address[4], address[3]=address[3],
+           address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR6);
+    RAM64 (in=in, load=out7, address[5]=address[5], address[4]=address[4], address[3]=address[3],
+           address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR7);
+    RAM64 (in=in, load=out8, address[5]=address[5], address[4]=address[4], address[3]=address[3],
+           address[2]=address[2], address[1]=address[1], address[0]=address[0], out=outR8);
+    Mux8Way16 (a=outR1, b=outR2, c=outR3, d=outR4, e=outR5, f=outR6, g=outR7, h=outR8, sel[2]=address[8],
+               sel[1]=address[7], sel[0]=address[6], out=out);
 }
 
 // This file is part of www.nand2tetris.org
@@ -888,7 +936,8 @@ CHIP CPU {
     // Mux16_2 block.
     Mux16 (a=aRegOut, b=inM, sel=instruction[12], out=mux16Out2);
     // ALU block.
-    ALU(x=dRegOut, y=mux16Out2, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=aluOut, zr=aluZr, ng=aluNg, out=outM);
+    ALU(x=dRegOut, y=mux16Out2, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8],
+        f=instruction[7], no=instruction[6], out=aluOut, zr=aluZr, ng=aluNg, out=outM);
     // writeM output block.
     Not (in=instruction[9], out=wmNotOut1);
     And (a=instruction[12], b=instruction[3], out=wmAndOut1);
@@ -936,16 +985,22 @@ CHIP Memory {
     And (a=true, b=notOut2, out=ramAnd1);
     And (a=load, b=ramAnd1, out=ramLoad);
     RAM16K (in=in, load=ramLoad, address=address[0..13], out=ramOut);
-    And16 (a[0]=ramAnd1, a[1]=ramAnd1, a[2]=ramAnd1, a[3]=ramAnd1, a[4]=ramAnd1, a[5]=ramAnd1, a[6]=ramAnd1, a[7]=ramAnd1, a[8]=ramAnd1, a[9]=ramAnd1, a[10]=ramAnd1, a[11]=ramAnd1, a[12]=ramAnd1, a[13]=ramAnd1, a[14]=ramAnd1, a[15]=ramAnd1, b=ramOut, out=ramFinal);
+    And16 (a[0]=ramAnd1, a[1]=ramAnd1, a[2]=ramAnd1, a[3]=ramAnd1, a[4]=ramAnd1, a[5]=ramAnd1, a[6]=ramAnd1,
+          a[7]=ramAnd1, a[8]=ramAnd1, a[9]=ramAnd1, a[10]=ramAnd1, a[11]=ramAnd1, a[12]=ramAnd1, a[13]=ramAnd1,
+          a[14]=ramAnd1, a[15]=ramAnd1, b=ramOut, out=ramFinal);
     // SCREEN
     And (a=notOut1, b=andOut2, out=scAnd1);
     And (a=load, b=scAnd1, out=scLoad);
-    And16 (a[0]=scAnd1, a[1]=scAnd1, a[2]=scAnd1, a[3]=scAnd1, a[4]=scAnd1, a[5]=scAnd1, a[6]=scAnd1, a[7]=scAnd1, a[8]=scAnd1, a[9]=scAnd1, a[10]=scAnd1, a[11]=scAnd1, a[12]=scAnd1, a[13]=scAnd1, a[14]=scAnd1, a[15]=scAnd1, b=scOut, out=scFinal);
+    And16 (a[0]=scAnd1, a[1]=scAnd1, a[2]=scAnd1, a[3]=scAnd1, a[4]=scAnd1, a[5]=scAnd1, a[6]=scAnd1,
+           a[7]=scAnd1, a[8]=scAnd1, a[9]=scAnd1, a[10]=scAnd1, a[11]=scAnd1, a[12]=scAnd1, a[13]=scAnd1,
+           a[14]=scAnd1, a[15]=scAnd1, b=scOut, out=scFinal);
     Screen (in=in, load=scLoad, address=address[0..12], out=scOut);
     // KEYBOARD
     Keyboard (out=kbOut);
     And (a=andOut1, b=andOut2, out=kbAnd1);
-    And16 (a[0]=kbAnd1, a[1]=kbAnd1, a[2]=kbAnd1, a[3]=kbAnd1, a[4]=kbAnd1, a[5]=kbAnd1, a[6]=kbAnd1, a[7]=kbAnd1, a[8]=kbAnd1, a[9]=kbAnd1, a[10]=kbAnd1, a[11]=kbAnd1, a[12]=kbAnd1, a[13]=kbAnd1, a[14]=kbAnd1, a[15]=kbAnd1, b=kbOut, out=kbFinal);
+    And16 (a[0]=kbAnd1, a[1]=kbAnd1, a[2]=kbAnd1, a[3]=kbAnd1, a[4]=kbAnd1, a[5]=kbAnd1, a[6]=kbAnd1,
+           a[7]=kbAnd1, a[8]=kbAnd1, a[9]=kbAnd1, a[10]=kbAnd1, a[11]=kbAnd1, a[12]=kbAnd1, a[13]=kbAnd1,
+           a[14]=kbAnd1, a[15]=kbAnd1, b=kbOut, out=kbFinal);
     // OUTPUT
     Or16 (a=ramFinal, b=scFinal, out=outFinal1);
     Or16 (a=outFinal1, b=kbFinal, out=out);
