@@ -4,7 +4,7 @@ title: SDK review
 
 Cloud vendors provide SDKs for developers in favour of easy connectivity. The following content summaries how these SDKs are architected, what software techniques have been deployed, and how APIs are designed. It is notable that only embedded C/C++ version is considered.
 
-1. **AWS IoT platform**
+#### **AWS IoT platform.**
 
 AWS IoT provides amazingly detailed documents on the overall architecture, developer’s guide and porting guide. There are two major features offered by AWS IoT services: MQTT connection and Thing Shadow. Both embedded C/C++ SDKs support such features, and they will be presented in the following content.
 
@@ -41,7 +41,8 @@ Note: Techniques used in AWS C++ SDK.
 - String: std::basic_string, std::char_traits, std::basic_stringstream, std::basic_istringstream, std::basic_ostringstream and basic_stringbuf.
 - It implements a nice logging system, in which variadic-argument macros were used.
 ```
-2. **IBM Watson IoT platform.**
+
+#### **IBM Watson IoT platform.**
 
 The SDKs for IBM Watson cloud have NOT gained much attention as I expected. The assertion could be obtained by viewing contributions and stars of their Github projects. The reason behind might be: these SDKs depend heavily on ‘paho-mqtt’ library and the major contributions are wrapper methods, which should be easy to understand since IBM is the inventor and promotor of MQTT protocol, and a huge supporter for ‘paho-mqtt’ project.
 

@@ -4,7 +4,7 @@ date: 2018-05-29 10:39:45
 ---
 
 ![Quantum Leaps broader my view of thinking embedded software](http://www.state-machine.com/qpc/qp_banner.jpg)
-*Coutesy of Quantum Leaps:* http://www.state-machine.com/    
+*Courtesy of Quantum Leaps:* http://www.state-machine.com/
 
 #### **Chapter 11: Software tracing for event-driven systems.**
 
@@ -13,10 +13,6 @@ Section 11.1 has a brilliant description of a non-intrusive tracing method. Quot
 > To minimize the RAM usage, the target-resident trace component typically uses a **circular trace buffer** that is continuously updated, and new data overwrites the old when the buffer "wraps around" due to limited size or transmission rate to the host. This reflects the typically applied *last-is-best* policy in collecting the trace data.
 
 Whenever reading the above description, I'm always wondering how SEGGER's systemview code works? Will try to dig in and to see whether a circular buffer is used to transmit data to JLink device.
-
-#### **Chapter**
-
-
 
 #### **Application Note: OOP in C**
 

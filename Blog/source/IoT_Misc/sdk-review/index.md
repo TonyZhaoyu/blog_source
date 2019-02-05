@@ -7,7 +7,7 @@ Cloud vendors provide SDKs for developers in favour of easy connectivity. The fo
 
 ---
 
-**AWS IoT platform**
+#### **AWS IoT platform.**
 
 AWS IoT provides amazingly detailed documents on the overall architecture, developer’s guide and porting guide. There are two major features offered by AWS IoT services: MQTT connection and Thing Shadow. Both embedded C/C++ SDKs support such features, and they will be presented in the following content.
 
@@ -47,7 +47,7 @@ Note: Techniques used in AWS C++ SDK.
 
 ---
 
-**IBM Watson IoT platform.**
+#### **IBM Watson IoT platform.**
 
 The SDKs for IBM Watson cloud have NOT gained much attention as I expected. The assertion could be obtained by viewing contributions and stars of their Github projects. The reason behind might be: these SDKs depend heavily on ‘paho-mqtt’ library and the major contributions are wrapper methods, which should be easy to understand since IBM is the inventor and promoter of MQTT protocol, and a huge supporter for ‘paho-mqtt’ project.
 

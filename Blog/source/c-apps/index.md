@@ -1,6 +1,6 @@
 ---
 title: Basics in C programming
-date: 2018-09-04 12:11:42
+date: 2019-02-05 14:16:31
 ---
 
 #### **The usage of sizeof() and strlen()**
