@@ -3,9 +3,6 @@ title: Notes for PSiCC2
 date: 2018-05-29 10:39:45
 ---
 
-![Quantum Leaps broader my view of thinking embedded software](http://www.state-machine.com/qpc/qp_banner.jpg)
-*Courtesy of Quantum Leaps:* http://www.state-machine.com/
-
 #### **Chapter 11: Software tracing for event-driven systems.**
 
 Section 11.1 has a brilliant description of a non-intrusive tracing method. Quoted below:
