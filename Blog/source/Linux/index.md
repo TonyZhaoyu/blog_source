@@ -160,7 +160,7 @@ $ git revert commit [commit No.]
 * How to un-track a folder but keep the folder on your disk.
 Link: https://stackoverflow.com/questions/24290358/remove-a-folder-from-git-tracking
 
-This also works for the situation where an unwanted submodule causing fatal error when 'git add'. The basic idea is to remove the folder from git's cache. 
+This also works for the situation where an unwanted submodule causing fatal error when 'git add'. The basic idea is to remove the folder from git's cache.
 
 1. Add the folder to the .gitignore
 2. Remove the folder from your local git tracking, but keep it on your disk.
@@ -246,6 +246,16 @@ $ ssh-keygen -R 192.168.42.1 -f "~/.ssh/known_hosts"
 $ ssh-keygen -R 192.168.42.1
 ```
 
+---
+
+#### *Markdown*
+
+* Embedded an image in a markdown script.
+  Ensure you know the url path of that image. The url path could be a github path. Usaally, the url from the github won't be rendered, and you will see a broken link in the position. To solve this, add `?raw=true` at the end of the url and place a line by following the syntax as bellow:
+
+```bash
+$ ![link text](url + `?raw=true`)
+```
 
 ***
 
