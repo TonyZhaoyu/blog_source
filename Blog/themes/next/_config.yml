@@ -161,12 +161,12 @@ menu:
     Nand2Tetris: /nand2tetris/ || flag
     TLPI: /linux-p-int/ || flag
   Linux:
-    default: /linux/ || flag
+    default: /Linux/ || flag
     Kernel rev - typeof: /kernel-rev-typeof/ || flag
     Kernel rev - rbTree: /kernel-rev-rbtree/ || flag
     Kernel rev - hashtable: /kernel-rev-hashtable/ || flag
   IoT Misc:
-    default: /iot_misc/ || flag
+    default: /misc-iot/ || flag
     SDK review: /sdk-review/ || flag
     Data model analysis: /data-model/ || flag
   Work Misc:
