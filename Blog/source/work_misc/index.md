@@ -3,7 +3,7 @@ title: Notes about BT-Mesh gateway v1.0
 date: 2019-02-11 10:48:14
 ---
 
-#### Field requirement analysis.
+#### Field requirement analysis
 
 1. The first goal is to check whether the requirements on the spreadsheet has been logged into the JIRA system.
 
@@ -47,9 +47,14 @@ date: 2019-02-11 10:48:14
     14) Offload the add device process to grouping in a much sense-making manner.
     https://jira.silabs.com/browse/IOTS_SW_BLE-491
 
+<span style="color:blue">The following features appear to be very important to performance optimization:</span>
+
   * Improvements that were left since v0.3.
   - [ ] Group table should use dynamic memory to decrease space complexity.
   - [ ] It could be convenient to expose table (i.e., dt, gt) iterators to either users or lower layers.
+  - [ ] Dynamic allocate more device table buckets if device table reaches a threshold. This is to prevent bucket setting from one-time actions.
+  - [ ] Reduce O(n^2) complexity when filling with device joined group.
+
   </br>
   * Feature evaluation.
 
@@ -126,3 +131,53 @@ Evaluate the criticality of the feature using 1 to 5 scales with 5 being the hig
 
   1. Offload the appkey generation to users. In group creation API, add two parameters: one is the string of appkey, the other is the new/old indicator.
   2. Redefine the data structure of group table, monitor keys?
+
+---
+
+#### Action item: 14/02/2019
+
+
+* Makefile for multiple platforms could be a pain.
+
+1. On MacOS, would expect a executable version without dynamic linking. On Linux, would expect a sample console with dynamic linking.
+
+    My simple solution is to create a new makefile namely test.mk to generate the executable statically.
+
+2. Need to think of a way to remove the shock after inserting a new item in the `ResponseId` enum structure, such that to find the item in an position agnostic way.
+
+    Solved by creating a MACRO which equals to CMD_MAX + 1.
+
+
+>Q: why a non-secured NCP firmware could not be factory reset on startup?
+ A: check if the firmware is correct.
+
+* From app-key to core data structure.
+
+1. Data structure review.
+
+  <span style="color:blue">Principle 1: no keys (except device keys) should be explicitly stored in the library.</span>
+
+
+>Idea: move timestamp to the API implementation file, and returns the timestamp(handler) when an API is called.
+ Comment: may not be difficult for combinational commands decides how many sub-commands were created at datahub layer rather the API layer.
+
+2. AppKey sending procedure analysis.
+
+  - What is the procedure of writing AppKey to the stack and what data will be returned from the stack (like an key index or something)?
+    As a reference, checkout the process of Xiaomi's library when dealing with AppKey.
+
+    It is up to user to decide if the key is new key or not. There are two situations:
+    - Firstly, if the key is an old key in the group table. Use the generated key index stored in the group table.
+    - Secondly, if the key is a new key, there are two sub-situations when generating a key. Sub-situation 1: If the key passed in is valid, generate a new key based on the given key string, and then update key index in related group. Sub-situation 2: If the key passed in is not valid, generate a new key and then update key index. The user is responsible for the consequences of using an invalid key (like failed to conduct gateway migration from A to B). Search for `mesh_prov_create_appkey` in the document for more BGAPI info.
+
+    The group creation API won't tell the user what is the key index. The user could query the library what is the metadata of a specified group so to get the appKey index.
+
+  - From now on, group creation requires a type 1 FSM to track and trace the addAppKey command to the stack.
+
+  - The appkey is bound to an network. It might have a limited number due to limitations of NVM3.
+
+3. AppKey binding to models of a joining node.
+
+  - Add a new state to the join_group procedure. Which is to bind AppKey to lightness group.
+
+  - <span style="color:blue">An improvement could be made is to create state for better code reading. The current solution depends on round 1/2.</span>
