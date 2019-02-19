@@ -153,31 +153,41 @@ Evaluate the criticality of the feature using 1 to 5 scales with 5 being the hig
 
 * From app-key to core data structure.
 
-1. Data structure review.
+  1. Data structure review.
 
-  <span style="color:blue">Principle 1: no keys (except device keys) should be explicitly stored in the library.</span>
+    <span style="color:blue">Principle 1: no keys (except device keys) should be explicitly stored in the library.</span>
 
 
->Idea: move timestamp to the API implementation file, and returns the timestamp(handler) when an API is called.
- Comment: may not be difficult for combinational commands decides how many sub-commands were created at datahub layer rather the API layer.
+  >Idea: move timestamp to the API implementation file, and returns the timestamp(handler) when an API is called.
+   Comment: may not be difficult for combinational commands decides how many sub-commands were created at datahub layer rather the API layer.
 
-2. AppKey sending procedure analysis.
+  2. AppKey sending procedure analysis.
 
-  - What is the procedure of writing AppKey to the stack and what data will be returned from the stack (like an key index or something)?
-    As a reference, checkout the process of Xiaomi's library when dealing with AppKey.
+    - What is the procedure of writing AppKey to the stack and what data will be returned from the stack (like an key index or something)?
+      As a reference, checkout the process of Xiaomi's library when dealing with AppKey.
 
-    It is up to user to decide if the key is new key or not. There are two situations:
-    - Firstly, if the key is an old key in the group table. Use the generated key index stored in the group table.
-    - Secondly, if the key is a new key, there are two sub-situations when generating a key. Sub-situation 1: If the key passed in is valid, generate a new key based on the given key string, and then update key index in related group. Sub-situation 2: If the key passed in is not valid, generate a new key and then update key index. The user is responsible for the consequences of using an invalid key (like failed to conduct gateway migration from A to B). Search for `mesh_prov_create_appkey` in the document for more BGAPI info.
+      It is up to user to decide if the key is new key or not. There are two situations:
+      - Firstly, if the key is an old key in the group table. Use the generated key index stored in the group table.
+      - Secondly, if the key is a new key, there are two sub-situations when generating a key. Sub-situation 1: If the key passed in is valid, generate a new key based on the given key string, and then update key index in related group. Sub-situation 2: If the key passed in is not valid, generate a new key and then update key index. The user is responsible for the consequences of using an invalid key (like failed to conduct gateway migration from A to B). Search for `mesh_prov_create_appkey` in the document for more BGAPI info.
 
-    The group creation API won't tell the user what is the key index. The user could query the library what is the metadata of a specified group so to get the appKey index.
+      The group creation API won't tell the user what is the key index. The user could query the library what is the metadata of a specified group so to get the appKey index.
 
-  - From now on, group creation requires a type 1 FSM to track and trace the addAppKey command to the stack.
+    - From now on, group creation requires a type 1 FSM to track and trace the addAppKey command to the stack.
 
-  - The appkey is bound to an network. It might have a limited number due to limitations of NVM3.
+    - The appkey is bound to an network. It might have a limited number due to limitations of NVM3.
 
-3. AppKey binding to models of a joining node.
+  3. AppKey binding to models of a joining node.
 
-  - Add a new state to the join_group procedure. Which is to bind AppKey to lightness group.
+    - Add a new state to the join_group procedure. Which is to bind AppKey to lightness group.
 
-  - <span style="color:blue">An improvement could be made is to create state for better code reading. The current solution depends on round 1/2.</span>
+    - <span style="color:blue">An improvement could be made is to create state for better code reading. The current solution depends on round 1/2.</span>
+
+
+#### Action item: 14/02/2019
+
+* Sub-steps to achieve 491.
+
+  1. No need to think about concurrent config for now as 491 is not involved in any configs.
+  2. Finish structure refinement. Make sure the group restructure works with the legacy code.
+  3. Create cmd-obj for grouping.
+  4. Fill in key creation function in the cmd-obj.
