@@ -169,8 +169,6 @@ menu:
     default: /misc-iot/ || flag
     SDK review: /sdk-review/ || flag
     Data model analysis: /data-model/ || flag
-  Work Misc:
-    default: /work_misc/ || th
 
 # Enable/Disable menu icons / item badges.
 menu_settings:
