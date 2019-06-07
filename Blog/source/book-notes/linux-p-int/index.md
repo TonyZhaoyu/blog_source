@@ -5,17 +5,17 @@ date: 2018-08-16 09:21:16
 
 #### **Chapter 56**
 
-1. **Socket file descriptor:**
+------------------------ **Socket file descriptor** ------------------------
 
 ```c
 fd = socket(domain, type, protocol)
 ```
 
 * The domain param could be chosen from AF_UNIX, AF_INET and AF_INET6, indicating local, IPv4 and IPv6 domains.
-* There are two types of sockets: stream and datagram (SOCK_STREAM or SOCK_DGRAM). Stream type is reliable (guaranteed transmission if network link is up), bidirectional and of no limitations about message boundaries (byte-stream). Stream socket could be connected to one peer only.
+* There are two types of sockets: stream and datagram (SOCK_STREAM or SOCK_DGRAM). Stream type is reliable (guaranteed transmission if network link is up), bidirectional and of no limitations about message boundaries (byte-stream). Stream socket could be connected to one peer only.
 * >In the internet domain, datagram sockets employ UDP while stream sockets employ TCP.
 
-2. **Socket system calls**
+------------------------ **Socket system calls** ------------------------
 
 Besides common function calls like socket(), bind(), listen(), accept() and connect() etc., there are ways to operate non-blocking socket I/O. The following contents focus mainly on the client side using TCP stream.
 

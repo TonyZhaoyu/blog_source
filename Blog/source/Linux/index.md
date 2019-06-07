@@ -1,26 +1,20 @@
 ---
-title: Commonly used Linux commands
+title: Misc Linux usage
 ---
 
-#### **Assign the current network interface to an IP address**
+#### **Network**
 
-Use : ifconfig netmask . e.g.,
+* Assign the current network interface to an IP address. Use `ifconfig netmask` . e.g.,
 
 ```bash
 $ ifconfig eth0 192.168.2.1 netmask 255.255.255.0
 ```
-
-***
-
-#### **Use nmap to report whether your device uses a Linux TCP/IP stack**
+* Use nmap to report whether your device uses a Linux TCP/IP stack:
 
 ```bash
 $ nmap -P0 -O
 ```
-
-***
-
-#### **Show IP ports**
+* Show IP ports
 
 ```bash
 $ lsof -i -P -n
@@ -29,6 +23,8 @@ $ lsof -i -P -n
 ***
 
 #### **Symbolic link:**
+
+* Usage:
 
 ┌── ln(1) link, ln -- make links
 │   ┌── Create a symbolic link.
@@ -40,6 +36,7 @@ ln -s /path/to/original /path/to/symlink
       └───────┬───────┘
               └── the path to the original file/folder
                   can use . or ~ or other relative paths
+* Example:
 
 ```bash
 $ echo content > original
@@ -50,6 +47,7 @@ lrwxr-xr-x  1 grgarside  staff    8 28 Jan 18:44 symlink -> original
 $ cat symlink
 content
 ```
+* MacOS exception:
 
 Notice MacOS symlink creation may be different. For example, if to create a link for commander of SimplicityStudio, we could:
 
@@ -59,9 +57,19 @@ $ ln -s /Applications/Simplicity Studio.app/Contents/Eclipse/developer/adapter_p
 
 There's no need to specify the name of command under /usr/local/bin, but providing a path is enough.
 
+* Windows/Cygwin exception:
+
+There is a simular link command in Windows/Cygwin namely `mklink`. There is one tricky usage of such a command when trying to compile under Cygwin. Sometimes the path is too long for GCC to handle (usually incurs error like no such file or path). To resolve the issue, use mklink to shorten the path. Say we have a fairly long path of the SDK, e.g., E:\xxx\ and our makefile is under E:\xxx\yyy\. One could try the following:
+
+```bash
+# /J indicates a path link.
+mklink /J sdk E:\xxx
+# Now the path becomes sdk\yyy\
+```
+
 ***
 
-#### **Add a new variable into the PATH environment:**
+#### **PATH environment:**
 
 ```bash
 $ echo $PATH
@@ -120,11 +128,13 @@ $ hexo new page "name"
 ```
 
 The created path will be: [hexo_directory]/source/[name]/index.md
-To add the page in the dropdown list, we need to modify the *_config.yml* file under [hexo_directory]/theme/biture/ directory.
-E.g.,
+To add the page in the dropdown list, we need to modify the *_config.yml* file under [hexo_directory]/theme/biture/ directory, e.g.,
+
+```html
 IoT Ecosystems:
    SDK review: /sdk-review/
    Data model analysis: /data-model/
+```
 
 ***
 
@@ -198,7 +208,7 @@ Reference:
 
 ***
 
-#### **dylib on MacOS**
+#### **MacOS dylib**
 
 There could be an error when using dylib (dynamic library) on MacOS. The error could be:
 
@@ -248,7 +258,7 @@ $ ssh-keygen -R 192.168.42.1
 
 ---
 
-#### *Markdown*
+#### **Markdown**
 
 * Embedded an image in a markdown script.
   Ensure you know the url path of that image. The url path could be a github path. Usaally, the url from the github won't be rendered, and you will see a broken link in the position. To solve this, add `?raw=true` at the end of the url and place a line by following the syntax as bellow:
@@ -259,7 +269,7 @@ $ ![link text](url + `?raw=true`)
 
 ***
 
-#### **Run Silabs Z3GatewayHost in the back-end**
+#### **Run exe in back-end**
 
 Z3GatewayHost application forks a child process to handle communications with serial port. Use *&* at the end would cause assertion in the child process. A reliable way to run the application in the back-end could refer to the following init script which was developed for running on OpenWrt.
 
@@ -280,7 +290,7 @@ stop() {
 
 ***
 
-#### **Some commonly used bash syntax**
+#### **Bash syntax**
 
 * Check if there is a specified directory.
 

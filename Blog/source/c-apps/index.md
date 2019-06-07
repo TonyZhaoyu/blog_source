@@ -3,7 +3,7 @@ title: Basics in C programming
 date: 2019-02-05 14:16:31
 ---
 
-#### **The usage of sizeof() and strlen()**
+#### **Rethink sizeof() and strlen()**
 
 The standard C functions sizeof() and strlen() are most likely one of the first functions ever used when learning C. They have been used at many aspects of validating a string, an instance of a structure. The following content shows what are the results of sizeof() and strlen() in various situations.
 
@@ -218,7 +218,7 @@ When using this function, please pay extra care about the string being passed to
 
 ***
 
-#### **GCC link to a shared library at a specific directory**
+#### **GCC - linker example**
 
 Link: https://stackoverflow.com/questions/8835108/how-to-specify-non-default-shared-library-path-in-gcc-linux-getting-error-whil
 

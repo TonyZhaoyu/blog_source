@@ -11,6 +11,8 @@ Section 11.1 has a brilliant description of a non-intrusive tracing method. Quot
 
 Whenever reading the above description, I'm always wondering how SEGGER's systemview code works? Will try to dig in and to see whether a circular buffer is used to transmit data to JLink device.
 
+***
+
 #### **Application Note: OOP in C**
 
 This App note is not part of the book, but what has been described in the App note is deployed in the QF code. Before exploring OOP in C code, some knowledge is worth discussing.

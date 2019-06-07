@@ -1,10 +1,13 @@
 ---
-title: Goals for 2019
+title: Wish list for 2019
 date: 2019-02-13 19:04:00
 tags:
 ---
 
-What I like to achieve in the year of 2019:
+Here is a wish list for 2019. I have done some tailor work, and the following should present a resonable one.
+
+1. C-code improvement.
+2. 
 
 1. Improve C programming by the following methods:
 
@@ -41,11 +44,6 @@ What I like to achieve in the year of 2019:
  * Carefully read BT-Mesh protocol specifications (if necessary, Bluetooth spec).
  * Be familiar with BT-Mesh model specifications.
  * (Optional) Be familiar with Z-Wave model specifications.
- * The measurement is based on:
-
-   a. Understand the conversations in the Slack channel.
-   b. Clearly knows what Jack has been doing around BGAPI.
-   c. Blog about the understanding.
 
 3. Improve data structure / algorithm.
 

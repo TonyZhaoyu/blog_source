@@ -1,5 +1,5 @@
 ---
-title: Path.mqtt.c library notes
+title: Paho.mqtt.c library notes
 date: 2018-08-16 20:43:20
 ---
 
@@ -102,7 +102,7 @@ hello world
 
 ***
 
-#### **Multi-threads in MQTTAsync.c**
+#### **Multi-threads in MQTTAsync**
 
 There's a commands list (a linked list) created at startup. This commands list could be inserted with commands by MQTTAsync_addCommand(). MQTTAsync_addCommand() is called in multiple conditions. For example, one condition where MQTTAsync_send() is called by an application, the command initiated by the application will be inserted into the command list and will be processed by MQTTAsync_processCommand().
 
@@ -147,7 +147,7 @@ if (m->c->messageQueue->count > 0)
 
 ***
 
-#### **A few words about Ember Application Framework**
+#### **Ember Application Framework**
 
 The application Z3GatewayHost could be running on a Linux machine. It could also be equipped with a MQTT client and talks to a MQTT broker using the APIs defined in UG129. The MQTT client is based on paho.mqtt.c library, which invokes two threads (total three considering the main thread) when executing. It's nature to wonder how to integrate a multi-threaded library into the Ember application framework without destroying anything. The answer is quite straightforward. In short, multi-threads won't interfere anything in the Ember framework.
 
