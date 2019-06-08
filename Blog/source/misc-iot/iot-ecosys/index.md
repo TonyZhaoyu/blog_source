@@ -1,5 +1,5 @@
 ---
-title: SDK review
+title: IOT Ecosystems
 ---
 
 Cloud vendors provide SDKs for developers in favour of easy connectivity. The following content summaries how these SDKs are architected, what software techniques have been deployed, and how APIs are designed. It is notable that only embedded C/C++ version is considered.
