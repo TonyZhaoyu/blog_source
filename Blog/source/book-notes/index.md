@@ -12,7 +12,7 @@ Notes for the following books:
 
 * `QP framework reference (PSICC2)`
 
-![Quantum Leaps broader my view of thinking embedded software](http://www.state-machine.com/qpc/qp_banner.jpg)
+<img src="http://www.state-machine.com/qpc/qp_banner.jpg" width="600">
 *Courtesy of Quantum Leaps:* http://www.state-machine.com/
 
 *  `The Linux programming interface (TLPI)`

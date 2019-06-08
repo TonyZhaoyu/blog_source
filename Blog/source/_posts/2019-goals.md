@@ -39,7 +39,7 @@ To begin with, here is a briefing of knowledge & skills to be improved.
 | 2 | IPC - semaphore & mutex | - `PDF: Micrium - uCOS-III` <br> - `FreeRTOS source code` | Same as item 1 |
 | 3 | Preemption-based scheduling policy | - `PDF: Micrium - uCOS-III` <br> - `FreeRTOS source code` | Same as item 1 |
 | 4 | Memory management policy | - `PDF: Micrium - uCOS-III` <br> - `FreeRTOS source code` | Same as item 1 |
-| 5 | Quantum Leap - QPC framework | - `BOOK: QPC design` <br> - `QPC source code` | Same as item 1 |
+| 5 | Quantum Leap - QPC framework | - `BOOK: QP framework design` <br> - `QP framework source code` | Same as item 1 |
 
 * **Verilog & RISC-V CPU**. It has been a really long time ever since last touched HDL (it was VHDL back then) in a Uni-Lab. As RISC-V becoming pervasive, it is time to work with some digital design I am long for. The long-term goal is to build a RISC-V CPU with 5 pipeline and 5 hardware thread.
 

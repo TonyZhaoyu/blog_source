@@ -148,32 +148,32 @@ menu:
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
   C Apps:
-    default: /c-apps/ || flag
-    Expt - Tcp Socket: /tcp-sock/ || flag
-    Expt - Console Interaction: /cli-int/ || flag
-    Expt - Embedded-ADT: /embed-adt/ || flag
-    Expt - Cmocka explore: /cmocka-exp/ || flag
-    Rev - Paho.mqtt.c: /paho-mqtt-c-notes/ || flag
-    C_Tricks: /c-usage/ || flag
-    Tutorial - Embedded: /embed-tutorial/ || flag
+    default: /c-apps/
+    Expt - Tcp Socket: /tcp-sock/
+    Expt - Console Interaction: /cli-int/
+    Expt - Embedded-ADT: /embed-adt/
+    Expt - Cmocka explore: /cmocka-exp/
+    Rev - Paho.mqtt.c: /paho-mqtt-c-notes/
+    C_Tricks: /c-usage/
+    Tutorial - Embedded: /embed-tutorial/
   Book Notes:
-    default: /book-notes/ || flag
-    PSICC2: /psicc2-notes/ || flag
-    Nand2Tetris: /nand2tetris/ || flag
-    TLPI: /linux-p-int/ || flag
+    default: /book-notes/
+    PSICC2: /psicc2-notes/
+    Nand2Tetris: /nand2tetris/
+    TLPI: /linux-p-int/
   Linux:
-    default: /Linux/ || flag
-    Kernel rev - typeof: /kernel-rev-typeof/ || flag
-    Kernel rev - rbTree: /kernel-rev-rbtree/ || flag
-    Kernel rev - hashtable: /kernel-rev-hashtable/ || flag
+    default: /Linux/
+    Kernel rev - typeof: /kernel-rev-typeof/
+    Kernel rev - rbTree: /kernel-rev-rbtree/
+    Kernel rev - hashtable: /kernel-rev-hashtable/
   IoT Misc:
-    default: /misc-iot/ || flag
-    SDK review: /sdk-review/ || flag
-    Data model analysis: /data-model/ || flag
+    default: /misc-iot/
+    IoT ecosys: /iot-ecosys/
+    Data model analysis: /data-model/
   RISC:
-    default: /RISC/ || flag
-    Expt - RISC-V: /RISC-V/ || flag
-    Expt - Verilog & Digital: /Verilog-digital/ || flag
+    default: /RISC/
+    Expt - RISC-V: /RISC-V/
+    Expt - Verilog & Digital: /Verilog-digital/
 
 # Enable/Disable menu icons / item badges.
 menu_settings:

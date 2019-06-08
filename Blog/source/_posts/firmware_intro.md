@@ -2,7 +2,7 @@
 title: Firmware 101
 ---
 
-![Beaglebone black layout](http://www.element14.com/community/servlet/JiveServlet/showImage/2-84952-167466/bbb-top-white.png)
+<img src="http://www.element14.com/community/servlet/JiveServlet/showImage/2-84952-167466/bbb-top-white.png" width="600">
 *Coutesy of Beaglebone Black*: https://beagleboard.org/black/.
 
 #### **Introduction**

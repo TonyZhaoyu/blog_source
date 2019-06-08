@@ -2,13 +2,14 @@
 title: Data model analysis
 date: 2018-07-31 11:29:49
 ---
+
 This article articulates why a protocol-agnostic data model is needed, and what off-the-shelf models could be favorable. It starts with a research of popular ecosystems, and focuses on the ones that supports interoperability. Then we exemplify multiple models using a lighting reference design, and conclude with comments on model definitions and efforts evaluation. This article would fulfil its commitment if it enlightens ideas on interoperations among Silabs’ mesh profolio.
 
 With a PAL (protocol abstraction layer), the architecture separates protocol specific module from upper layer applications, which frees developers hands from ‘dirty’ works in mesh management. We extent the device info APIs from the architecture by arguing about model abstraction. The first concept to be explained is that model abstraction is a mandatory requirement. The code of unification is by nature a standard targets to, and the method of achieving such a unification is through abstraction upon generality and binging on deviation. This code suffices our case in which inter-protocol communication would be conducted on a single platform. From the perspective of a gateway developer, the key to a successful product is to integrate the mesh technology into their favorite ecosystem. During such a integration, their experience teaches us that the data of most interests are from the device (i.e., status report) or to a specific device (i.e., remote control). Therefore, a fine-grained model of such data would be much favorable. The developer could be blunt about specific protocols as the translation is tedious due to heavy protocol-centric operations. Hence, the PAL becomes vital since we are experts on making such a translation. The propose hereby is to offer PAL based data models with full-featured translations in regard to protocols.
 
 Here is a research about public IoT models and protocol based models (i.e., ZCL, Z-Wave device class and  Ble-mesh model). We carefully picked two public IoT models, i.e., OCF and W3C WoT (web of things) and briefly introduces their concepts as below. Notice that the research focuses on modelling, and features like cloud connectivity would be briefly covered.
 
-•	W3C WoT (https://w3c.github.io/wot-architecture/)
+*	W3C WoT (https://w3c.github.io/wot-architecture/)
 
 The following lines (duplicated from W3CWoT architecture) depicts an excellent explanation of the WoT challenge, and emphasizes the importance of metadata of a ‘thing’.
 
@@ -16,7 +17,7 @@ The following lines (duplicated from W3CWoT architecture) depicts an excellent e
 
 This metadata, or thing description in WoT’s language, describes a thing using three core Properties, Actions and Events (discussions about other aspects like semantic schema and Web Linking is out of scope of this article). Basically, Properties stand for the capability of a thing for example the DCD in Ble-mesh and node description in ZigBee. Actions offer functions to manipulate the internal state of a thing, while Event represents asynchronous messages from a source like reporting in ZigBee. WoT’s metadata model is straightforward, and could to some extent map to our mesh protocols’ models. However, WoT does not specify any device types and property types. For instance, it does not define a light bulb with on/off capability. The detailed definitions are totally user-wise. There is an intriguing technique, namely protocol binding that shows the scalability of WoT’s model. This technique allows nested arrays and objects to extend metadata payload to be ready for different IoT platforms (like OCF batch payload, SenML payload) with different transportation methods (like MQTT or CoAP).
 
-•	OCF (https://openconnectivity.org/developer/specifications)
+*	OCF (https://openconnectivity.org/developer/specifications)
 
 The goal for OCF is to achieve peer-to-peer, bridging and forwarding, and reporting and control of IoT devices. In marketing’s context, here’s a saying duplicated from their website:
 
