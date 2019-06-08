@@ -22,7 +22,7 @@ $ lsof -i -P -n
 
 ***
 
-#### **Symbolic link:**
+#### **Symbolic link**
 
 * Usage:
 
@@ -69,7 +69,7 @@ mklink /J sdk E:\xxx
 
 ***
 
-#### **PATH environment:**
+#### **PATH environment**
 
 ```bash
 $ echo $PATH
@@ -261,7 +261,7 @@ $ ssh-keygen -R 192.168.42.1
 #### **Markdown**
 
 * Embedded an image in a markdown script.
-  Ensure you know the url path of that image. The url path could be a github path. Usaally, the url from the github won't be rendered, and you will see a broken link in the position. To solve this, add `?raw=true` at the end of the url and place a line by following the syntax as bellow:
+  Ensure you know the url path of that image. The url path could be a github path. Usually, the url from the github would not be rendered, and you will see a broken link in the position. To solve this, add `?raw=true` at the end of the url and place a line by following the syntax as bellow:
 
 ```bash
 $ ![link text](url + `?raw=true`)
@@ -338,7 +338,7 @@ echo "This line will never be reached!"
 
 * Check if a long string contains a subString.
 
-Ref: https://stackoverflow.com/questions/229551/how-to-check-if-a-string-contains-a-substring-in-bash
+Reference: https://stackoverflow.com/questions/229551/how-to-check-if-a-string-contains-a-substring-in-bash
 
 ```bash
 string='My long string'
