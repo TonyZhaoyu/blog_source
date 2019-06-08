@@ -155,6 +155,7 @@ menu:
     Expt - Cmocka explore: /cmocka-exp/ || flag
     Rev - Paho.mqtt.c: /paho-mqtt-c-notes/ || flag
     C_Tricks: /c-usage/ || flag
+    Tutorial - Embedded: /embed-tutorial/ || flag
   Book Notes:
     default: /book-notes/ || flag
     PSICC2: /psicc2-notes/ || flag
@@ -169,6 +170,10 @@ menu:
     default: /misc-iot/ || flag
     SDK review: /sdk-review/ || flag
     Data model analysis: /data-model/ || flag
+  RISC:
+    default: /RISC/ || flag
+    Expt - RISC-V: /RISC-V/ || flag
+    Expt - Verilog & Digital: /Verilog-digital/ || flag
 
 # Enable/Disable menu icons / item badges.
 menu_settings:
