@@ -9,8 +9,12 @@ RISC ISA has been dominating the embedded world over decades. ARM, specifically,
 
 *Courtesy of RISC-V foundation:* https://riscv.org/
 
-Moreover, the spirit of open-source has stimulated multiple organizations (like https://open-isa.org/) to embrace the new era of SoC designs, including some big names (like *Silicon Labs* and *NXP*) from IC industry. Really exited to foresee open RISC dominates the market in 5 to 10 years.
+Moreover, the spirit of open-source has stimulated multiple organizations to embrace the new era of SoC designs, including some big names (like *Silicon Labs* and *NXP*) from IC industry. Really exited to foresee open RISC dominates the market in 5 to 10 years.
 
 <img src="https://www.openhwgroup.org/images/openhw-landscape.svg" width="500">
 
 *Courtesy of open hardware group:* https://www.openhwgroup.org/
+
+<img src="https://isastaging.wpengine.com/wp-content/uploads/2018/11/board.png" width="500">
+
+*Courtesy of open-isa:* https://open-isa.org/
