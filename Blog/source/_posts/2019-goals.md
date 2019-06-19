@@ -46,7 +46,7 @@ To begin with, here is a briefing of knowledge & skills to be improved.
 |  *Item #* | *Description*  | *Methods* | *Measurement* |
 |:-:|-|-|-|
 | 1 | Verilog syntax study | - `BOOK: Verilog HDL introduction` | Summarize in blogs. Source code on Github. |
-| 2 | Digital design based on Verilog | - `BOOK: Verilog HDL introduction` <br> - `BOOK: Digital design: with intro to Verilog HDL` <br> - `Verify code on iVerilog` | Summarize in blogs. Source code and verification code on Github. `The goal is to build necessary components for a CPU.` |
+| 2 | Digital design based on Verilog | - `BOOK: Verilog HDL introduction` <br> - `BOOK: Digital design: with intro to Verilog HDL` <br> - `Verify code on iVerilog` | Summarize in blogs. Source code and verification code on Github. <br> `The goal is to build necessary components for a CPU.` |
 | 3 | RISC-V & CPU study | Check references | Summarize in blogs. Source code on Github. |
 
 **Reference**:

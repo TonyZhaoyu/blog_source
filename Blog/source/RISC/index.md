@@ -18,3 +18,14 @@ Moreover, the spirit of open-source has stimulated multiple organizations to emb
 <img src="https://isastaging.wpengine.com/wp-content/uploads/2018/11/board.png" width="500">
 
 *Courtesy of open-isa:* https://open-isa.org/
+
+***
+
+There is one company playing a leader role in RISC-V community. The name is SiFive. The company is known from its background, i.e., strong academic relationship with UCB computer architecture lab.
+
+<img src="https://community.cadence.com/cfs-file/__key/communityserver-blogs-components-weblogfiles/00-00-00-01-06/sifive_2D00_logo_2D00_v1.png" width="500">
+
+*Courtesy of SiFive:* https://www.sifive.com/
+
+Having attended a few seminars of SiFive, I've summarized a few ideas/jargons hereby. I'd apologize for the less structural organization as some ideas are new to me. Also, there might be some missing descriptions, and they will be updated later.
+
