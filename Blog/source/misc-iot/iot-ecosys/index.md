@@ -4,7 +4,7 @@ title: IOT Ecosystems
 
 Cloud vendors provide SDKs for developers in favour of easy connectivity. The following content summaries how these SDKs are architected, what software techniques have been deployed, and how APIs are designed. It is notable that only embedded C/C++ version is considered.
 
-#### **AWS IoT platform.**
+#### **AWS IoT platform**
 
 AWS IoT provides amazingly detailed documents on the overall architecture, developer’s guide and porting guide. There are two major features offered by AWS IoT services: MQTT connection and Thing Shadow. Both embedded C/C++ SDKs support such features, and they will be presented in the following content.
 
@@ -14,7 +14,7 @@ AWS IoT provides amazingly detailed documents on the overall architecture, devel
 
 [Reference 3]: https://github.com/aws/aws-iot-device-sdk-embedded-C/blob/master/PortingGuide.md.
 
-  1.1 How AWS IoT cloud works.
+* **How AWS IoT cloud works?**
 
 Thing shadow is defined as “a JSON document which is used to store and retrieve current state information for a thing” (reproduced in http://docs.aws.amazon.com/iot/latest/developerguide/iot-thing-shadows.html). The state of a IoT thing could be obtained or set through MQTT topics. Thing Shadow related implementations could be found under src folder, with prefix ‘aws_iot_shadow’ in names. Specifically, the implementation contains three basic operations, namely UPDATE, GET and DELETE (http://docs.aws.amazon.com/iot/latest/developerguide/using-thing-shadows.html).
 
@@ -24,13 +24,13 @@ Note: Each message sent over a topic could be related to a success/failure notif
 ```
 It is also noteworthy that AWS IoT platform does not allow dynamic device registry without a certificate. Take the following scenario as an example. A new device joined the network via a gateway, and the gateway loyally talks to AWS IoT platform about the newly joined device who is ready to upload data. This is, however, rejected by AWS IoT since it finds out the newly joined does not have a valid certificate. The link below specifies how devices correctly connect to AWS IoT platform (https://software.intel.com/en-us/articles/using-amazon-web-services-aws-iot-with-intel-iot-devices-and-gateways).
 
-* AWS IoT embedded C SDK.
+* **AWS IoT embedded C SDK**
 
 The SDK depends on ARM ‘mbedTLS’ library and ‘jsmn’ library (CppUTest is ignored herein). ‘mbedTLS’ offers a light-weight implementation of cryptographic and SSL/TLS (https://en.wikipedia.org/wiki/Transport_Layer_Security) features. ‘jsmn’ offers a JSON parser that could be deployed on resource-limited platforms. One could find MQTT implementation under src folder, with prefix ‘aws_iot_mqtt_client’ in names. The implementation follows the flavour of IBM’s ‘paho-mqtt’ library, and based on wrappers of the underlying mbedTLS connection.
 
 Note: There is one interesting feature implemented in yield() method, which monitors the health of TCP connection. In a single-threaded implementation, yield() method will be frequently called (https://github.com/aws/aws-iot-device-sdk-embedded-C/blob/master/PortingGuide.md).
 
-* AWS C++ SDK.
+* **AWS C++ SDK**
 
 In C++ version, three ways of network connection could be selected since resource limitation of a platform will no longer be a big issue. These ways are ‘mbedTLS’, ‘openSSL’ and ‘webSocket’. ‘rapidjson’ (http://rapidjson.org/) is used as the JSON parser. Frankly, the provided sample code is a little messy. This may be due to less typedef usage and nested naming space. But the basic operations were similar to C version.
 ```
@@ -42,15 +42,15 @@ Note: Techniques used in AWS C++ SDK.
 - It implements a nice logging system, in which variadic-argument macros were used.
 ```
 
-#### **IBM Watson IoT platform.**
+#### **IBM Watson IoT platform**
 
 The SDKs for IBM Watson cloud have NOT gained much attention as I expected. The assertion could be obtained by viewing contributions and stars of their Github projects. The reason behind might be: these SDKs depend heavily on ‘paho-mqtt’ library and the major contributions are wrapper methods, which should be easy to understand since IBM is the inventor and promotor of MQTT protocol, and a huge supporter for ‘paho-mqtt’ project.
 
-* How IBM Watson IoT cloud works.
+* **How IBM Watson IoT cloud works**
 
 IBM Bluemix is a platform that contains tons of services and applications, including Watson IoT platform. To start working on IBM’s IoT cloud, one needs to register an account on Bluemix and enable Watson service. Next, on server-end, one could create a thing based on Node-RED. On device-end, an embedded control unit could connected to the thing on the server and starts communicating by using provided SDKs. Since we will be focusing on device-end, and we let readers research server-end. Here is a related link (https://console.ng.bluemix.net/docs/starters/IoT/iot500.html).
 
-* IBM Watson C SDK.
+* **IBM Watson C SDK**
 
 The device-end (including gateway) could talk to IBM Watson via MQTT topics. Given the following example, we introduce three major MQTT communications defined by IBM Watson platform.
 

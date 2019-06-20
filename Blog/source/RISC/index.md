@@ -28,3 +28,33 @@ There is one company playing a leader role in RISC-V community. The name is SiFi
 *Courtesy of SiFive:* https://www.sifive.com/
 
 Having attended a few seminars of SiFive, I've summarized a few ideas/jargons hereby. I'd apologize for the less structural organization as some ideas are new to me. Also, there might be some missing descriptions, and they will be updated later.
+
+* **RISC-V continuing works in 2019**
+
+Some jargons with simple descriptions are presented below:
+
+1. CLIC: It is a RISC-V Core-Local Interrupt Controller ([CLIC](https://github.com/sifive/clic-spec/blob/master/clic.adoc)) proposed by SiFive. It is expected to replace  the existing RISC-V local interrupt scheme (CLINT) in the future. The CLIC also implements the standard RISC-V platform-level interrupt controller (PLIC).
+
+2. Vectors: Most refers to [vector extension](https://github.com/riscv/riscv-v-spec/blob/master/v-spec.adoc). The ideas is to outperform SIMD instructions.
+
+3. Hypervisor: RISC-V supports three privilege modes, i.e., Machine mode, Supervisor mode and User mode. Hypervisor is an extension of the Supervisor mode which provides virtualization etc.
+
+4. ZFinx: Quoted from [vector extension](https://github.com/riscv/riscv-v-spec/blob/master/v-spec.adoc): `Zfinx ("F in X") is a new ISA option under consideration where floating-point instructions take their arguments from the integer register file.`.
+
+5. Code density: There is a great answer [here](https://electronics.stackexchange.com/questions/4123/about-code-density-and-its-definition). Basically, high density code takes less RAM space and takes less micro-instructions to realize a function. Usually it depends on the CPU ISA and the compiler.
+
+* **Tools/techs used by SiFive**
+
+As SiFive works closely with the [BAR](https://bar.eecs.berkeley.edu/), i.e., Berkeley Architecture Research, some tools have been adopted from the laboratory to the commercial. The following lists include tools originated from lab and tools that have been developed by SiFive.
+
+1. Code generator: [Chisel](https://chisel.eecs.berkeley.edu/) - Constructing Hardware in a Scala Embedded Language. SiFive use Chisel to model customized CPU systems on the Web, and generates verifiable RTL code for customers.
+
+2. Chip generator: Prometheus. Not sure what it is after Googling.
+
+3. [Tilelink](https://sifive.cdn.prismic.io/sifive%2F57f93ecf-2c42-46f7-9818-bcdd7d39400a_tilelink-spec-1.7.1.pdf): Basically it is a bus to connect general-purpose processors, DMA engines and accelerators etc.
+
+4. Chiplink: I could not find proper documents on Google, but basically it is a serialized chip-to-chip TileLink.
+
+* **Business models and road-maps of SiFive and SiFive China**
+
+Firstly, SiFive China runs independently to SiFive US. It seemed that SiFive China would focus more on AI/ML, as they claim all-in vector extension. There will be a AI EVB launch this year, namely Freedom Resolution. SiFive is an IP core vendor but has a very strong ambition to stretches out its ecosystem to AI/ML market. As such, they created `Design-share` to offer levels of IPs to customers by partnering various IP vendors (e.g., Imagination for GPU and A/D companies). To improve time-to-market, SiFive builds IP templates (like IoT MCUs, smart Audio, smart Video etc) for customers. By such a method, the spirit what SiFive offers makes hardware design `soft`, and to some extent matches the idea of SaaS (software as a service).

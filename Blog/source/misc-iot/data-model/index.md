@@ -9,7 +9,7 @@ With a PAL (protocol abstraction layer), the architecture separates protocol spe
 
 Here is a research about public IoT models and protocol based models (i.e., ZCL, Z-Wave device class and  Ble-mesh model). We carefully picked two public IoT models, i.e., OCF and W3C WoT (web of things) and briefly introduces their concepts as below. Notice that the research focuses on modelling, and features like cloud connectivity would be briefly covered.
 
-*	W3C WoT (https://w3c.github.io/wot-architecture/)
+*	[**W3C WoT**](https://w3c.github.io/wot-architecture/)
 
 The following lines (duplicated from W3CWoT architecture) depicts an excellent explanation of the WoT challenge, and emphasizes the importance of metadata of a ‘thing’.
 
@@ -17,7 +17,7 @@ The following lines (duplicated from W3CWoT architecture) depicts an excellent e
 
 This metadata, or thing description in WoT’s language, describes a thing using three core Properties, Actions and Events (discussions about other aspects like semantic schema and Web Linking is out of scope of this article). Basically, Properties stand for the capability of a thing for example the DCD in Ble-mesh and node description in ZigBee. Actions offer functions to manipulate the internal state of a thing, while Event represents asynchronous messages from a source like reporting in ZigBee. WoT’s metadata model is straightforward, and could to some extent map to our mesh protocols’ models. However, WoT does not specify any device types and property types. For instance, it does not define a light bulb with on/off capability. The detailed definitions are totally user-wise. There is an intriguing technique, namely protocol binding that shows the scalability of WoT’s model. This technique allows nested arrays and objects to extend metadata payload to be ready for different IoT platforms (like OCF batch payload, SenML payload) with different transportation methods (like MQTT or CoAP).
 
-*	OCF (https://openconnectivity.org/developer/specifications)
+*	[**OCF**](https://openconnectivity.org/developer/specifications)
 
 The goal for OCF is to achieve peer-to-peer, bridging and forwarding, and reporting and control of IoT devices. In marketing’s context, here’s a saying duplicated from their website:
 
@@ -29,124 +29,132 @@ Details of OCF models could be viewed using the following link: (https://oneiota
 
 To illustrate the aforementioned models, we use a lighting reference design, and abstract its properties based on data models of W3CWoT and OCF. We also present how ZCL, ZWave and Ble-mesh models this reference design for translation evaluation. It is noteworthy that all the models are based on JSON schema. Since mesh protocols have not defined JSON interpretation, these JSON models are created by filling in clusters (or SIG model) info pertaining to protocols. Note that some data values are not accurate, but they are irrelevant to the model description.
 
-1.	W3CWoT JSON model of a light. WoT does not specify any properties in detail, and hence ZCL serves as the reference.
-```JSON
-{
-   "id": "0x000B000000000000-1",
-   "name": "light1",
-   "properties": {
-"status": {
-         "writable": false,
-         "observable": false,
-         "type": "string",
-         "forms": [{
-             "href": "coaps://light1/status",
-             "mediaType": "application/json"
-         }]
-    }},
-    "actions": {
-     "toggle": {
-        "forms": [{
-            "href": "coaps://light1/toggle",
-            "mediaType": "application/json"
-        }]}},
-    "events": {
-        "overheating": {
-            "type": "string",
-            "forms": [{
-                "href": "coaps://light1/oh",
-                "mediaType": "application/json"
-            }]
-        }}
-}
-```
+1. W3CWoT JSON model of a light. WoT does not specify any properties in detail, and hence ZCL serves as the reference.
+
+  ```JSON
+  {
+    "id": "0x000B000000000000-1",
+    "name": "light1",
+    "properties": {
+  "status": {
+          "writable": false,
+          "observable": false,
+          "type": "string",
+          "forms": [{
+              "href": "coaps://light1/status",
+              "mediaType": "application/json"
+          }]
+      }},
+      "actions": {
+      "toggle": {
+          "forms": [{
+              "href": "coaps://light1/toggle",
+              "mediaType": "application/json"
+          }]}},
+      "events": {
+          "overheating": {
+              "type": "string",
+              "forms": [{
+                  "href": "coaps://light1/oh",
+                  "mediaType": "application/json"
+              }]
+          }}
+  }
+  ```
+
 2.	OCF model (on the basis of public available OCF models). Could not find a light with on/off capability, and hence use the light enabling brightness control. The second JSON object presents the OCF definition of the oic.r.light.brightness.
 
-Object1:
-```JSON
-{
-    "href": "coaps://light1",
-    "rt": ["oic.r.light.brightness"],
-    "if": ["oic.if.a", "oic.if.baseline"],
-    "value": "100"
-}
-```
+  2.1. Object1:
 
-Object2:
-```JSON
-{
-  "id":       
-  "http://openinterconnect.org/iotdatamodels/schemas/oic.r.light.brightness.json#",
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights  
-   reserved.",
-  "title": "Brightness",
-  "definitions": {
-    "oic.r.light.brightness": {
-      "type": "object",
-      "properties": {
-        "brightness": {
-          "type": "integer",
-          "description": "Quantized representation in the range 0-100 of the current
-           sensed or set value for Brightness",
-          "minimum": 0,
-          "maximum": 100
+  ```JSON
+  {
+      "href": "coaps://light1",
+      "rt": ["oic.r.light.brightness"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "value": "100"
+  }
+  ```
+
+  2.2. Object2:
+
+  ```JSON
+  {
+    "id":       
+    "http://openinterconnect.org/iotdatamodels/schemas/oic.r.light.brightness.json#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights  
+    reserved.",
+    "title": "Brightness",
+    "definitions": {
+      "oic.r.light.brightness": {
+        "type": "object",
+        "properties": {
+          "brightness": {
+            "type": "integer",
+            "description": "Quantized representation in the range 0-100 of the current
+            sensed or set value for Brightness",
+            "minimum": 0,
+            "maximum": 100
+          }
         }
       }
-    }
-  },
-  "type": "object",
-  "allOf": [
-    {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
-    {"$ref": "#/definitions/oic.r.light.brightness"}
-  ],
-  "required": [ "brightness" ]
-}
-```
+    },
+    "type": "object",
+    "allOf": [
+      {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
+      {"$ref": "#/definitions/oic.r.light.brightness"}
+    ],
+    "required": [ "brightness" ]
+  }
+  ```
 
-3.	ZCL model.
-```JSON
-{
-   "nodeId": 0x0A00,
-   "deviceState": 0x10,
-   "deviceType": 0xXXXX,
-   "timeSinceLastMessage": 0x23,
-   "deviceEndpoint":{
-       "eui64": 0x000B000000000000,
-       "endpoint": 0x01,
-       "clusterInfo":[{
-           "clusterId": 0x0006,
-           "clusterType": "out"
-       }]
-   }
-}
-```
+3. ZCL model.
+
+  ```JSON
+  {
+    "nodeId": 0x0A00,
+    "deviceState": 0x10,
+    "deviceType": 0xXXXX,
+    "timeSinceLastMessage": 0x23,
+    "deviceEndpoint":{
+        "eui64": 0x000B000000000000,
+        "endpoint": 0x01,
+        "clusterInfo":[{
+            "clusterId": 0x0006,
+            "clusterType": "out"
+        }]
+    }
+  }
+  ```
 
 4.	BLE-mesh model.
-```JSON
-{
-   "uuid": "53696C6162734465762DAF8D64570B00",
-   "mac": "xx:xx:xx:xx",
-   "models":[
-      0x1006,
-      0x0002,
-      0x1304,
-      0x1002
-   ]
-}
-```
+
+  ```JSON
+  {
+    "uuid": "53696C6162734465762DAF8D64570B00",
+    "mac": "xx:xx:xx:xx",
+    "models":[
+        0x1006,
+        0x0002,
+        0x1304,
+        0x1002
+    ]
+  }
+  ```
 
 5.	ZWave model.
-```JSON
-{
-   "id": "xx:xx:xx:xx",
-   "deviceType": "xxxx",
-   "roleType": "xxxx"
-   "deviceClass":[
-      XXXX,
-   ]
-}
-```
+
+  ```JSON
+  {
+    "id": "xx:xx:xx:xx",
+    "deviceType": "xxxx",
+    "roleType": "xxxx"
+    "deviceClass":[
+        XXXX,
+    ]
+  }
+  ```
+
 From the public documents, ZWave model utilizes device classes to describe control and reporting commands. Although the aforementioned ZWave model may not be accurate, it should sketch major parts after communicating with ZWave AEs.
 
 In summary, what we could learn from W3C WoT model is the concept of actions and events abstraction. Despite the implicit declarations of ZCL and ZWave of such an abstraction, WoT’s declaration shows the light on the arguably most useful functions to emphasis interoperability. When investigating OCF models, it is not hard to find the model is too Restful-oriented to be augmented into ours. Moreover, OCF has limitations to support all ZCL models, and the death end of ZCL/IP integration in 2016 proved the difficulty. One direction for the next action item is to create a superset-alike definition by leveraging the concept of WoT, and by extracting common descriptions of ZCL, ZWave as well as Ble-mesh. We could start with light and switch reference design, and add more when new types come to play.
