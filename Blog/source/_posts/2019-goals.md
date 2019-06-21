@@ -15,7 +15,7 @@ To begin with, here is a briefing of knowledge & skills to be improved.
 
 ***
 
-* Tasks for improving **C** coding skills.
+* **Tasks for improving *C* coding skills**
 
 |  *Item #* | *Description*  | *Methods* | *Measurement* |
 |:-:|-|-|-|

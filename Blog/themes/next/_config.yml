@@ -156,11 +156,12 @@ menu:
     Rev - Paho.mqtt.c: /paho-mqtt-c-notes/ || tags
     C_Tricks: /c-usage/ || tags
     Tutorial - Embedded: /embed-tutorial/ || tags
-  Book Notes:
+  Book/Spec Notes:
     default: /book-notes/ || archive
     PSICC2: /psicc2-notes/ || tags
     Nand2Tetris: /nand2tetris/ || tags
     TLPI: /linux-p-int/ || tags
+    BLE_MESH: /ble-mesh/ || tags
   Linux:
     default: /Linux/ || archive
     Kernel rev - typeof: /kernel-rev-typeof/ || tags

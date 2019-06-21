@@ -1,9 +1,9 @@
 ---
-title: Book Notes
+title: Book/Spec Notes
 date: 2019-02-05 17:05:59
 ---
 
-Notes for the following books:
+##### Notes for books
 
 * **Nand2Tetris reference book**
 
@@ -18,3 +18,9 @@ Notes for the following books:
 * **The Linux programming interface (TLPI)**
 
 <img src="https://upload.wikimedia.org/wikipedia/en/2/22/The_Linux_Programming_Interface.jpg">
+
+##### Notes for specs
+
+<img src="https://3pl46c46ctx02p7rzdsvsg21-wpengine.netdna-ssl.com/wp-content/themes/bluetooth/images/logos/bluetooth-logo-color-black.svg" style="border-style: none">
+
+*Courtesy of Bluetooth Mesh specifications:*  https://www.bluetooth.com/specifications/mesh-specifications/
