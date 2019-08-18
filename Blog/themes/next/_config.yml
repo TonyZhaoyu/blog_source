@@ -167,6 +167,8 @@ menu:
     Kernel rev - typeof: /kernel-rev-typeof/ || tags
     Kernel rev - rbTree: /kernel-rev-rbtree/ || tags
     Kernel rev - hashtable: /kernel-rev-hashtable/ || tags
+  Hardware:
+    default: /hardware/ || archive
   IoT Misc:
     default: /misc-iot/ || archive
     IoT ecosys: /iot-ecosys/ || tags

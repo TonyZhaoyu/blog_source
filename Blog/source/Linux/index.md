@@ -128,7 +128,7 @@ $ hexo new page "name"
 ```
 
 The created path will be: [hexo_directory]/source/[name]/index.md
-To add the page in the dropdown list, we need to modify the *_config.yml* file under [hexo_directory]/theme/biture/ directory, e.g.,
+To add the page in the dropdown list, we need to modify the *_config.yml* file under [hexo_directory]/theme/next/ directory, e.g.,
 
 ```html
 IoT Ecosystems:

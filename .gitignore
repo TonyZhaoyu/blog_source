@@ -1,4 +1,5 @@
 Blog/node_modules/*
 Blog/public/*
 Blog/.vscode/*
-
+Blog/package-lock.json
+Blog/package.json
