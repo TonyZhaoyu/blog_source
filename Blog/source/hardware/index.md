@@ -35,7 +35,14 @@ There are basically three ways to take advantage of the flow control:
   There is no need for extra wiring of software flow control. The flow control is decided by two specific ASCII characters i.e., XON - 0x11 and XOFF - 0x13. If the transmitter reads a XOFF from the receiver, the transmission should halt, and it could resume after reading a XON.
 
 **References**:
+
 <https://learn.sparkfun.com/tutorials/serial-communication/all>
 <https://www.silabs.com/documents/public/application-notes/an0059.0-uart-flow-control.pdf>
 
+**Hardware flow control from a PC**:
+
+Using a UART-to-TTL converter, the PC could talk to a MCU using UART protocol. Popular converters like [CP2102](https://www.silabs.com/documents/public/data-sheets/CP2102-9.pdf) could also provide flow controls. However, it might be hard for users to initiate flow controls as CP2102 by default. In other words, the PC needs to send specific commands to the converter so as to enable flow controls inside (check this [link](https://www.silabs.com/community/interface/forum.topic.html/cp2102_rts_cts_quest-PhJX)). Unfortunately, most of the PC software does not support sending such commands. Hence, to test flow control, it'd be better to use two MCUs.
+
 #### Use UARTs on a MCU
+
+1. One common way of 
