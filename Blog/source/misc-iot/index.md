@@ -18,3 +18,5 @@ For models:
 * W3C WoT (web of things): (https://w3c.github.io/wot-architecture/)
 
 * OCF (https://openconnectivity.org/developer/specifications)
+
+In addition, security in IoT is addressed as the topic is becoming pervasive.
