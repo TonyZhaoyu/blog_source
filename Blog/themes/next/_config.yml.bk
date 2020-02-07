@@ -142,15 +142,42 @@ menu:
   home: / || home
   #about: /about/ || user
   #tags: /tags/ || tags
-  categories: /categories/ || th
+  #categories: /categories/ || th
   #archives: /archives/ || archive
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
-  IoT Jotting:
-    default: /iot-misc/ || tags
-  RISC Jotting:
-    default: /RISC/ || tags
+  Coding:
+    default: /coding/ || archive
+    Expt - Tcp Socket: /tcp-sock/ || tags
+    Expt - Console Interaction: /cli-int/ || tags
+    Expt - Embedded-ADT: /embed-adt/ || tags
+    Expt - Cmocka explore: /cmocka-exp/ || tags
+    Rev - Paho.mqtt.c: /paho-mqtt-c-notes/ || tags
+    C_Tricks: /c-usage/ || tags
+    Tutorial - Embedded: /embed-tutorial/ || tags
+  Book Notes:
+    default: /book-notes/ || archive
+    PSICC2: /psicc2-notes/ || tags
+    Nand2Tetris: /nand2tetris/ || tags
+    TLPI: /linux-p-int/ || tags
+    BLE_MESH: /ble-mesh/ || tags
+  Linux:
+    default: /Linux/ || archive
+    Kernel rev - typeof: /kernel-rev-typeof/ || tags
+    Kernel rev - rbTree: /kernel-rev-rbtree/ || tags
+    Kernel rev - hashtable: /kernel-rev-hashtable/ || tags
+  Hardware:
+    default: /hardware/ || archive
+  IoT Misc:
+    default: /misc-iot/ || archive
+    IoT ecosys: /iot-ecosys/ || tags
+    Data model analysis: /data-model/ || tags
+    Security: /iot-security/ || tags
+  RISC:
+    default: /RISC/ || archive
+    Expt - RISC-V: /RISC-V/ || tags
+    Expt - Verilog & Digital: /Verilog-digital/ || tags
 
 # Enable/Disable menu icons / item badges.
 menu_settings:
