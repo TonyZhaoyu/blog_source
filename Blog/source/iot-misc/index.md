@@ -1,5 +1,5 @@
 ---
-title: Something about IoT
+title: IoT Notes
 date: 2019-02-05 17:14:25
 ---
 
@@ -204,9 +204,11 @@ AWS IoT provides amazingly detailed documents on the overall architecture, devel
 Thing shadow is defined as “a JSON document which is used to store and retrieve current state information for a thing” (reproduced in http://docs.aws.amazon.com/iot/latest/developerguide/iot-thing-shadows.html). The state of a IoT thing could be obtained or set through MQTT topics. Thing Shadow related implementations could be found under src folder, with prefix ‘aws_iot_shadow’ in names. Specifically, the implementation contains three basic operations, namely UPDATE, GET and DELETE (http://docs.aws.amazon.com/iot/latest/developerguide/using-thing-shadows.html).
 
 AWS IoT defines a set of APIs based on MQTT topics. As mentioned, there are three parent topics:“aws/things/[thingName]/shadow/update”, “aws/things/[thingName]/shadow/update/get” and “aws/things/[thingName]/shadow/update/delete”. Under each parent topic, there are several sub-topics for better connectivity. For example, to improve QoS of a sent message, one could listen to “aws/things/[thingName]/shadow/update/accepted” and “aws/things/[thingName]/shadow/update/rejected”.
-```
+
+`
 Note: Each message sent over a topic could be related to a success/failure notification. For instance, if a message was sent over xxxx/update topic, users could get a notification from either xxxx/update/accepted (indicating success) or xxxx/update/rejected (indicating failure).
-```
+`
+
 It is also noteworthy that AWS IoT platform does not allow dynamic device registry without a certificate. Take the following scenario as an example. A new device joined the network via a gateway, and the gateway loyally talks to AWS IoT platform about the newly joined device who is ready to upload data. This is, however, rejected by AWS IoT since it finds out the newly joined does not have a valid certificate. The link below specifies how devices correctly connect to AWS IoT platform (https://software.intel.com/en-us/articles/using-amazon-web-services-aws-iot-with-intel-iot-devices-and-gateways).
 
 * **AWS IoT embedded C SDK**
@@ -218,14 +220,13 @@ Note: There is one interesting feature implemented in yield() method, which moni
 * **AWS C++ SDK**
 
 In C++ version, three ways of network connection could be selected since resource limitation of a platform will no longer be a big issue. These ways are ‘mbedTLS’, ‘openSSL’ and ‘webSocket’. ‘rapidjson’ (http://rapidjson.org/) is used as the JSON parser. Frankly, the provided sample code is a little messy. This may be due to less typedef usage and nested naming space. But the basic operations were similar to C version.
-```
-Note: Techniques used in AWS C++ SDK.
+
+`Note: Techniques used in AWS C++ SDK.`
 - Overview: this SDK conforms C++11 standard.
 - Smart pointers: std::shared_ptr and std::unique_ptr.
 - STL: std::map, std::queue and std::vector.
 - String: std::basic_string, std::char_traits, std::basic_stringstream, std::basic_istringstream, std::basic_ostringstream and basic_stringbuf.
 - It implements a nice logging system, in which variadic-argument macros were used.
-```
 
 #### **IBM Watson IoT platform**
 
@@ -247,13 +248,11 @@ To help understanding the architecture of C++ SDK, doxygen (doxygen link) and do
 
 Here is a briefing on the structure of this C++ SDK. For conciseness, the name of parent classes represents the names from the parent and its child classes. On the top, IOTP_MessageHandler contains a reference of IOTP_Client. In IOTP_Client, a reference of Properties is included. From the UML diagrams, we should be easy to figure out what are IOTP_MessageHandler and IOTP_Client responsible for. The Properties class, which is defined beyond the range of namespace Watson_IOTP, is able to store properties like device type, device ID, domain name etc, and provides interfaces for fetching those properties. An example could be used to demonstrate how the structure works. Let’s assume an end-device has been registered on Watson platform. A message is pushed from the cloud to the gateway, expecting the end-device to upload its status. The IOT_MessageHandler would parse the message from the cloud and confirm the function this message wants to achieve. Then IOT_MessageHandler may call a method mActionHandler() defined in IOT_Client to fetch the status from the end-device. While mActionHandler processing, the device ID or device type declared in the message would be used to compare with the stored ones in the Properties class. At this point, event flows through three classes. The C++ source code applies some techniques. The following presents a snippet of them.
 
-```
-Note: Nested class usage in C++ SDK.
+`Note: Nested class usage in C++ SDK.`
 - Definition of nested classes : http://en.cppreference.com/w/cpp/language/nested_types.
 - The purpose: ‘nested classes are cool for hiding implementation details’. http://stackoverflow.com/questions/4571355/why-would-one-use-nested-classes-in-c
 - Example: a nested Node private class in List class. Node could only be instantiate within List scope.
 
-Note: Shared pointer in C++ SDK.
+`Note: Shared pointer in C++ SDK.`
 - “The shared_ptr class template stores a pointer to a dynamically allocated object, typically with a C++ new-expression. The object pointed to is guaranteed to be deleted when the last shared_ptr pointing to it is destroyed or reset.” — From http://www.boost.org/doc/libs/1_63_0/libs/smart_ptr/shared_ptr.htm
 - In the source code, the shared pointer is mixed with the usage of typedef to improve code readability, e.g., “typedef std::shared_ptr ptr_t;”.
-```
