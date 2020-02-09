@@ -1,5 +1,5 @@
 ---
-title:RISC-V Notes
+title: RISC-V Notes
 date: 2019-06-07 17:52:56
 ---
 

@@ -150,7 +150,7 @@ menu:
   IoT Jotting:
     default: /iot-misc/ || tags
   RISC Jotting:
-    default: /RISC/ || tags
+    default: /risc/ || tags
 
 # Enable/Disable menu icons / item badges.
 menu_settings:
