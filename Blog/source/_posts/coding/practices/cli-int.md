@@ -2,15 +2,14 @@
 title: CLI interactions
 date: 2018-09-12 14:09:59
 categories:
-- [Coding, Template]
+- [Coding, Practices, CLI interactions]
 ---
 
 This article provides a very simple implementation of CLI interaction. The code basically shows how to leverage 'string' functions of libc. Notice the implementation of handler functions (e.g., cmd_start_scan) are omitted. The following code could be running in a thread.
 
 ```c
 /*****************************************************************************
-@file: cli_agent_posix
-@brief: this project is inspired by https://github.com/brenns10/lsh.git
+@brief: Inspired by https://github.com/brenns10/lsh.git
 *****************************************************************************/
 
 #include <sys/wait.h>
@@ -20,7 +19,6 @@ This article provides a very simple implementation of CLI interaction. The code 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "cli_agent_abs.h"
 
 #define LSH_TOK_BUFSIZE (64)
 #define LSH_RL_BUFSIZE  (1024)
@@ -35,80 +33,13 @@ typedef struct _Cli_Cmd {
   uint8_t         hidden;
 } Cli_Cmd;
 
+/*
+ `cmd_start` and `cmd_exit` could be implemented in other c files.
+ */
 static Cli_Cmd cmdsMap[] = {
   {
-    "factory_reset",   "@param: none", "\t",
-     cmd_factory_reset , 0
-  },
-  {
-    "start_scan",      "@param: report interval", "\t",
-     cmd_start_scan,   0
-  },
-  {
-    "stop_scan",       "@param: none", "\t",
-     cmd_stop_scan,    0
-  },
-  {
-    "add_idx",           "@param: device index in scan report", "\t",
-    cmd_device_add_idx,  0
-  },
-  {
-    "add_idx_oob",           "@param: 0-device index in scan report, "
-                             "1-oob data", "\t",
-    cmd_device_add_idx_oob,  0
-  },
-  {
-    "form_group",   "@param: group name(no space)", "\t",
-     cmd_form_group,    0
-  },
-  {
-    "join_group",   "@param: 0-group name(no space), "
-                    "1-device addr", "\t",
-     cmd_join_group,    0
-  },
-  {
-    "set_report",    "@param: 0-group name(no space), "
-                     "1-device addr", "\t",
-     cmd_set_report,     0
-  },
-  {
-    "set_relay",    "@param: 0-device addr, "
-                    "1-[1/0] i.e., [on/off]", "\t",
-     cmd_set_relay,      0
-  },
-  {
-    "set_friend",    "@param: 0-device addr, "
-                     "1-[1/0] i.e., [on/off]", "\t",
-     cmd_set_friend,      0
-  },
-  {
-    "get_relay",    "@param: device addr", "\t",
-     cmd_get_relay,      0
-  },
-  {
-    "get_friend",    "@param: device addr", "\t",
-     cmd_get_friend,      0
-  },
-  {
-    "ctrl_on_off",     "@param: 0-group name(no space), "
-                       "1-[1/0] i.e., [on/off]", "\t",
-     cmd_ctrl_onoff,      0
-  },
-  {
-    "reset_node",      "@param: device addr", "\t",
-    cmd_reset_node,    0
-  },
-  {
-    "prt_dt",      "@brief: print device table.", "\t",
-     cmd_prt_dt,       0
-  },
-  {
-    "prt_gt",      "@brief: print group (pub/sub) table.", "\t",
-     cmd_prt_gt,       0
-  },
-  {
-    "prt_rpt",      "@brief: print the latest device report.", "",
-     cmd_prt_report,   0
+    "start",   "@brief: start the program.", "\t",
+     cmd_start , 0
   },
   {
     "exit",      "@brief: exit the program.", "\t",
@@ -185,7 +116,7 @@ static void cli_execute(uint8_t argc, char **argv)
     }
   }
 
-  printf("[cli_agent]: %s unknown command\r\n", argv[0]);
+  printf("[console]: %s unknown command\r\n", argv[0]);
 }
 
 /**
@@ -203,7 +134,7 @@ static char *cli_read_line(void)
   buffer = (char *)malloc(sizeof(char) * bufsize);
 
   if(!buffer) {
-    fprintf(stderr, "[cli_agent]: allocation error\n");
+    fprintf(stderr, "[console]: allocation error\n");
   }
 
   while (1) {
@@ -225,7 +156,7 @@ static char *cli_read_line(void)
       bufsize += LSH_RL_BUFSIZE;
       buffer = realloc(buffer, bufsize);
       if (!buffer) {
-        fprintf(stderr, "[cli_agent]: allocation error\n");
+        fprintf(stderr, "[console]: allocation error\n");
       }
     }
   }
@@ -245,7 +176,7 @@ static char **cli_split_line(char *line, uint8_t *argc)
   char *token, **tokens_backup;
 
   if(!tokens) {
-    fprintf(stderr, "[cli_agent]: allocation error\n");
+    fprintf(stderr, "[console]: allocation error\n");
   }
 
   token = strtok(line, LSH_TOK_DELIM);
@@ -259,7 +190,7 @@ static char **cli_split_line(char *line, uint8_t *argc)
       tokens = realloc(tokens, bufsize * sizeof(char*));
       if(!tokens) {
 		    free(tokens_backup);
-        fprintf(stderr, "[cli_agent]: allocation error\n");
+        fprintf(stderr, "[console]: allocation error\n");
       }
     }
 
@@ -270,12 +201,12 @@ static char **cli_split_line(char *line, uint8_t *argc)
   return tokens;
 }
 
-void cli_agent_initialize(void)
+void console_initialize(void)
 {
   return;
 }
 
-void cli_agent_task_func(void *param)
+void console_task_func(void *param)
 {
   uint8_t argc;
   char    *line;

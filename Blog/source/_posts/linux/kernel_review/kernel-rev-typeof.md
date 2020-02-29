@@ -1,6 +1,8 @@
 ---
 title: Kernel review - typeof and container_of
 date: 2018-11-07 10:19:10
+categories:
+- [Linux, Kernel Review, typeof and container_of]
 ---
 
 #### **The famous "typeof" and "container_of"**

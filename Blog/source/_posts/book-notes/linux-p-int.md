@@ -1,11 +1,17 @@
 ---
-title: Notes for The Linux programming interface
+title: The Linux programming interface
 date: 2018-08-16 09:21:16
+categories:
+- [Book notes, Embedded SW, The Linux programming interface]
 ---
 
-#### **Chapter 56**
+#### The Linux programming interface (TLPI)
 
------------------------- **Socket file descriptor** ------------------------
+<img src="https://upload.wikimedia.org/wikipedia/en/2/22/The_Linux_Programming_Interface.jpg">
+
+#### Chapter 56
+
+##### Socket file descriptor
 
 ```c
 fd = socket(domain, type, protocol)
@@ -13,9 +19,9 @@ fd = socket(domain, type, protocol)
 
 * The domain param could be chosen from AF_UNIX, AF_INET and AF_INET6, indicating local, IPv4 and IPv6 domains.
 * There are two types of sockets: stream and datagram (SOCK_STREAM or SOCK_DGRAM). Stream type is reliable (guaranteed transmission if network link is up), bidirectional and of no limitations about message boundaries (byte-stream). Stream socket could be connected to one peer only.
-* >In the internet domain, datagram sockets employ UDP while stream sockets employ TCP.
+* `In the internet domain, datagram sockets employ UDP while stream sockets employ TCP.`
 
------------------------- **Socket system calls** ------------------------
+##### Socket system calls
 
 Besides common function calls like socket(), bind(), listen(), accept() and connect() etc., there are ways to operate non-blocking socket I/O. The following contents focus mainly on the client side using TCP stream.
 
@@ -47,7 +53,7 @@ In 56.5.4, the I/O methods of conducting UNIX domain stream packets are listed. 
 
 ***
 
-#### **Chapter 59**
+#### Chapter 59
 
 I will be focusing on IPv4 TCP stream in this chapter. Again, internet domain sockets could be implemented on top of TCP. They provide a reliable, bidirectional, byte-stream communication channel.
 
@@ -69,7 +75,7 @@ struct sockaddr_in {           // IPv4 socket address.
 };
 ```
 
-Note taht sin_port and sin_addr should be in network byte order. Hence, there should be a conversion from host to the network byte order. More commonly used methods for IPv4/v6 with dotted-decimal or hex-string conversion to presentation format are inet_pton() and inet_ntop(), defined in *arpa/inet.h*.
+Note that sin_port and sin_addr should be in network byte order. Hence, there should be a conversion from host to the network byte order. More commonly used methods for IPv4/v6 with dotted-decimal or hex-string conversion to presentation format are inet_pton() and inet_ntop(), defined in *arpa/inet.h*.
 
 An example of a TCP client connection could be the following:
 
@@ -85,7 +91,7 @@ close(cfd);
 
 ***
 
-#### **Chapter 61**
+#### Chapter 61
 
 Socket-specific I/O system calls: recv() and send():
 

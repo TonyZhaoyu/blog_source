@@ -2,7 +2,7 @@
 title: Basics in C programming
 date: 2019-02-05 14:16:31
 categories:
-- [Coding, C, Rethink sizeof() and strlen()]
+- [Coding, C Knowledge Base, Rethink sizeof and strlen]
 ---
 
 #### **Rethink sizeof() and strlen()**

@@ -1,5 +1,8 @@
 ---
 title: Misc Linux usage
+date: 2018-11-07 10:19:10
+categories:
+- [Linux, Misc Usage]
 ---
 
 #### **Network**

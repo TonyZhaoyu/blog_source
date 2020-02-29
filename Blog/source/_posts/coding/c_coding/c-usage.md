@@ -2,7 +2,7 @@
 title: Techniques in C and compiler
 date: 2018-08-13 11:52:06
 categories:
-- [Coding, C, Malloc an array of pointers]
+- [Coding, C Knowledge Base, Malloc an array of pointers]
 ---
 
 #### **Malloc an array of pointers**

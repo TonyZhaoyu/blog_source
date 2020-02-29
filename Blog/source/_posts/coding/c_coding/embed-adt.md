@@ -2,7 +2,7 @@
 title: Embedded ADT
 date: 2018-09-04 11:55:32
 categories:
-- [Coding, Template]
+- [Coding, C Knowledge Base, Embedded ADT]
 ---
 
 #### **Hash table in C**

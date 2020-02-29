@@ -1,22 +1,28 @@
 ---
-title: Notes for The element of computing systems (i.e., nand2tetris)
+title: The Element of Computing Systems (aka., Nand2tetris)
 date: 2018-08-14 17:01:04
+categories:
+- [Book notes, CPU, Nand2tetris]
 ---
+
+#### Nand2Tetris reference book
+
+<img src="https://static.wixstatic.com/media/44046b_68deee3a58e64efdba36a6813c4ea906~mv2.png/v1/crop/x_73,y_0,w_663,h_654/fill/w_663,h_653,al_c,q_85/44046b_68deee3a58e64efdba36a6813c4ea906~mv2.webp" width="300" style="border-style: none">
 
 The article covers project1 ~ project2 or chapter 1 ~ chapter 6, which are fundamentals of computer architectures based on HDL (an hardware description language defined in the book). Course materials could refer to https://www.nand2tetris.org/course, and videos on Coursera. The goal for this article is to build a Hack computer based on simple combinational and sequential logic elements composed in HDL.
 
-**HACK computer overview**:
-![HACK computer overview](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/HACK_computer.png?raw=true)
+* HACK computer overview:
+    ![HACK computer overview](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/HACK_computer.png?raw=true)
 
-**CPU interface**:
-![CPU interface](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/CPU_interface.png?raw=true)
+* CPU interface:
+    ![CPU interface](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/CPU_interface.png?raw=true)
 
-**CPU control/data path**:
-![CPU control/data path](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/CPU_path.png?raw=true)
+* CPU control/data path:
+    ![CPU control/data path](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/CPU_path.png?raw=true)
 
 The code below is HDL implementation of project 1, 2, 3 and 5.
 
-* Project 1: boolean logic
+##### Project 1: boolean logic
 
 ```c
 // This file is part of www.nand2tetris.org
@@ -419,7 +425,7 @@ CHIP Xor {
 }
 ```
 
-* Project 2: boolean arithmetic
+##### Project 2: boolean arithmetic
 
 ```c
 // This file is part of www.nand2tetris.org
@@ -594,7 +600,7 @@ CHIP Inc16 {
 }
 ```
 
-* Project 3: sequential logic
+##### Project 3: sequential logic
 
 ```c
 // This file is part of www.nand2tetris.org
@@ -869,7 +875,7 @@ CHIP Register {
 }
 ```
 
-* Project 5: computer architecture
+##### Project 5: computer architecture
 
 ```c
 // This file is part of www.nand2tetris.org

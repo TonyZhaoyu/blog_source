@@ -2,7 +2,7 @@
 title: Notes of embedded tutorials
 date: 2019-06-07 17:47:42
 categories:
-- [Coding, Notes]
+- [Book notes, Embedded SW, Video tutorials]
 ---
 
 #### **Episode 2**

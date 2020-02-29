@@ -2,7 +2,7 @@
 title: Paho.mqtt.c library notes
 date: 2018-08-16 20:43:20
 categories:
-- [Coding, Open-Source Notes]
+- [Coding, Review, Paho mqtt C]
 ---
 
 #### **Use MQTT client library**

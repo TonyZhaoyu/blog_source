@@ -1,6 +1,8 @@
 ---
 title: Kernel review - hash table
 date: 2018-11-14 11:55:27
+categories:
+- [Linux, Kernel Review, Hash table]
 ---
 
 The implementation of hash table in the Linux kernel uses golden ratio constants to deterministically calculates a random number from any key. Such constants are defined in *include/linux/hash.h*. The following code gives you an example of using a 32-bit constant.
