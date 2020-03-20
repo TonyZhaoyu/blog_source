@@ -1,11 +1,11 @@
 ---
-title: Security Processes in WiFi Devices
+title: Basics and Concepts in Secured Connectivity
 date: 2020-03-17 17:47:42
 categories:
 - [IoT Security]
 ---
 
-This article analyzes common ways to secure connectivity between a WiFi device and cloud. Some basics of cryptography will be addressed in the mean time.
+Some basics of cryptography will be addressed in the mean time. This is mainly to address secured connectivity to cloud.
 
 #### Basics of Cryptography
 
@@ -27,3 +27,62 @@ This article analyzes common ways to secure connectivity between a WiFi device a
 
     > A good hash function is able to indicate minor changes of the message. In other words, a minor change of the message would result in significant changes in the hash value. Examples are SHA-1 and SHA-256.
 
+#### Algorithms and Key Management
+
+##### Randomness
+
+Randomness is critical to **unpredictable** key generation. Some hardware contributes to randomness by what's called RNG. Some cases that is not able to leverage hardware resources could use seed sources of high entropy to produce unpredictable **pesudorandom** numbers. A seed is a number or vector (e.g., `IV` initialization vector) used to initialize a PRNG.
+
+> `Entropy` is a measure of the disorder (randomness) in a system. Hence, we could say that a system has a high entropy source.
+
+##### Algorithms
+
+There are three major types of algorithms: hash functions, ciphers and encoders. Please notice the difference between **hashing** and **hash functions**.
+
+* Hash functions takes *arbitrarily-sized* input ==> a shorter, *fixed-length* output.
+* Cyphers are used to encryption and decryption. Refer to the last section.
+* Encoders are not related to security. Refer to Base64 for more information.
+
+What are algorithms been used:
+
+* Pseudorandom number generation.
+* Key generation and management.
+* MAC (**message authentication code**) creation and validation.
+* Digital signature creation and validation.
+* Digital certification creation and validation.
+
+##### Keys
+
+Symmetric keys are used in cyphers and MAC (message authentication code). Asymmetric keys are used in cyphers and digital signatures.
+
+* Asymmetric keys contains public keys and private keys.
+    1. Public keys are used to encrypt plaintext and verify digital signatures.
+    2. Private keys are used to decrypt ciphertext and create digital signatures.
+
+A problem comes with public key is that how to ensure the authenticity of the public key's origin? Digital certificate (cert) verifies such an authenticity, and the cert itself is verified by a trusted 3rd-party (namely, CA). See the following section.
+
+* Public key distribution could be done in two ways below:
+    1. Out-of-band distribution of public key fingerprints. A fingerprint is a shorter version of the key's characters, e.g., a hash of the key and associated identify info. Recall the method I used to send emails at Silabs security cause. We need Slack to verity the fingerprint of the public key.
+    2. Digital certificates. A digital cert is used to prove ownership of a public and private key pair. It usually issued by a trusted 3-party which usually includes:
+        2.1 Public key.
+        2.2 Key Owner.
+        2.3 Key Issuer.
+        2.4 Expiration date.
+        2.5 A digital signature that validates the integrity of the certificate and the authenticity of the issuer.
+
+* Certificate could be signed by a previous certificate in a chain of trust.
+
+* Public key infrastructure, i.e., PKI supports issuance, maintenance and revocation of digital certs. CA (certificate authority) is part of PKI.
+
+##### Cryptography in Applications
+
+Protected communications could be done on a authentic channel, a confidential channel and a secured channel. Check the following diagram to see certain resistance of each channel:
+
+|  | Disclosure Resistant | Tamper Resistant |
+| Authentic Channel |  No | Yes |
+| Confidential Channel | Yes | No |
+| Secure Channel | Yes | Yes |
+
+* Tampering is defined as an attack against integrity, authenticity, or availability.
+
+The tutorial video appears to be very `confusing`.
