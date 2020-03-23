@@ -114,3 +114,5 @@ A diagram shows message integrity functions:
 ![HACK computer overview](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/digital_signature/Sender.png?raw=true)
 
 ![HACK computer overview](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/digital_signature/Receiver.png?raw=true)
+
+* The above method ensures the integrity of the message, and the message itself could be encrypted.
