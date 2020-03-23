@@ -111,8 +111,8 @@ A diagram shows message integrity functions:
 
 * Digital signature provides non-repudiation assurance because every party to a communication has a unique key which they sign the message. The following diagrams illustrates a digital signature verification process:
 
-![HACK computer overview](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/digital_signature/Sender.png?raw=true)
+![Sender of Digital Signature](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/digital_signature/Sender.png?raw=true)
 
-![HACK computer overview](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/digital_signature/Receiver.png?raw=true)
+![Receiver of Digital Signature](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/digital_signature/Receiver.png?raw=true)
 
 * The above method ensures the integrity of the message, and the message itself could be encrypted.
