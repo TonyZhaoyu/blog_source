@@ -79,6 +79,7 @@ A problem comes with public key is that how to ensure the authenticity of the pu
 Protected communications could be done on a authentic channel, a confidential channel and a secured channel. Check the following diagram to see certain resistance of each channel:
 
 |  | Disclosure Resistant | Tamper Resistant |
+| ---- | ---- | ---- |
 | Authentic Channel |  No | Yes |
 | Confidential Channel | Yes | No |
 | Secure Channel | Yes | Yes |
@@ -86,3 +87,30 @@ Protected communications could be done on a authentic channel, a confidential ch
 * Tampering is defined as an attack against integrity, authenticity, or availability.
 
 The tutorial video appears to be very `confusing`.
+
+##### Message Integrity
+
+Tampering is an attack against `integrity`, `authenticity` and `availability`. 
+
+* To understand availability, here is something:
+    > When a system is regularly non-functioning, information availability is affected and significantly impacts users.
+
+* Message integrity indicates that the message is not spoofed (e.g., send email impersonate a contact) or forged (modified info):
+    1. Replaying message attack.
+    2. Creating a message pretending to be someone you are not.
+
+A diagram shows message integrity functions:
+
+> Non-repudiation is the assurance that someone cannot deny something. Typically, non-repudiation refers to the ability to ensure that a party to a contract or a communication cannot deny the authenticity of their signature on a document or the sending of a message that they originated.
+
+|  | Key | Authenticity | Integrity | Non-repudiation |
+| -- | -- | -- | -- | -- |
+| Hash |  |  | Yes |  |
+| Message Authentication Code (MAC) | Symmetric | Yes | Yes |  |
+| Digital Signature | Asymmetric | Yes | Yes | Yes |
+
+* Digital signature provides non-repudiation assurance because every party to a communication has a unique key which they sign the message. The following diagrams illustrates a digital signature verification process:
+
+![HACK computer overview](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/digital_signature/Sender.png?raw=true)
+
+![HACK computer overview](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/digital_signature/Receiver.png?raw=true)
