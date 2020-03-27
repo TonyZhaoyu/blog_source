@@ -103,6 +103,8 @@ A diagram shows message integrity functions:
 
 > Non-repudiation is the assurance that someone cannot deny something. Typically, non-repudiation refers to the ability to ensure that a party to a contract or a communication cannot deny the authenticity of their signature on a document or the sending of a message that they originated.
 
+Authentication also provides non-repudiation, which means once authenticated, someone cannot deny any actions.
+
 |  | Key | Authenticity | Integrity | Non-repudiation |
 | -- | -- | -- | -- | -- |
 | Hash |  |  | Yes |  |
@@ -116,3 +118,122 @@ A diagram shows message integrity functions:
 ![Receiver of Digital Signature](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/digital_signature/Receiver.png?raw=true)
 
 * The above method ensures the integrity of the message, and the message itself could be encrypted.
+
+##### Mobile Data with Crypto
+
+* Authenticity verifies the origin of the data, while integrity verifies the message is intact.
+
+* To safely deliver `public keys` to others, we wrap them in x.509 certificates.
+
+* Root of trust:
+Trust is central to public key cryptography. To trust a cert, you must trust the cert used to sign that cert. To trust that signing certificate, you must trust its signer. The process continues until you reach a final root cert. The root cert is a special self-signed cert where the private key is highly guarded, and the corresponding public key is distributed with operating systems and web browsers.
+
+* How digital signature works:
+Usually use a hash function to hash the whole file to produce a certain length of the string, and then encrypt the string using a private key to create a digital signature. The receiver of the digital signature first decrypts the digital signature, and get the hash. Then produce a hash based on the received message. Next compare the produced hash with the decrypted hash to check authenticity and integrity.
+
+* Cryptographically secured hash function in a nutshell:
+    1. Any input produces a completely unique hash output of a fixed length.
+    2. Event minor differences between two inputs will create substantially different outputs.
+    3. Hash functions are useful for `storing password`, producing file checksums, and to identify specific files or data.
+
+    A typical use-case of hashing to store a password is:
+    > To integrate hashing in the password storage workflow, when the user is created, instead of storing the password in cleartext, we hash the password and store the username and hash pair in the database table. When the user logs in, we hash the password sent and compare it to the hash connected with the provided username. If the hashed password and the stored hash match, we have a valid login. It's important to note that we never store the cleartext password in the process, we hash it and then forget it.
+
+    4. A salt is random data added to the hashing process to ensure that no two passwords produce the same hash. The salt is saved as a pseudo-secret that the application later uses when comparing passwords.
+
+* TLS supports various crypto methods by providing a cipher suites (illustrated below).
+    ![Cypher suite](https://github.com/TonyZhaoyu/blog_source/blob/master/pics/digital_signature/Cypher_suite.png?raw=true)
+
+* Best practices to ensure secure data communication:
+
+    1. Use TLS on all network comm.
+    2. Use built-in libraries.
+    3. Only use TLS - never SSL.
+    4. Choose strong cypher suites.
+    5. Never use `self-signed certs`.
+    6. Verify cert chains.
+    7. Alert users of invalid certs.
+    8. Keep sensitive data out of URL.
+
+#### Architecture Risk Analysis and Remediation
+
+* Impact vs. probability.
+
+* Risk management:
+
+    1. Reduce risk, e.g., TLS to all comm to stop eavesdropping.
+    2. Avoid risk, e.g., if a new feature is to violate company's risk tolerance, it may be necessary to exclude the feature.
+    3. Transfer risk, e.g., transfer the risk a third party.
+    4. Accept risk, e.g., low risk probability and high cost for mitigation.
+
+* Data types:
+
+    1. Data at rest. Best practices include:
+        1.1 Choosing appropriate algorithms.
+        1.2 Using trusted implementations of such algorithms.
+        1.3 Using pseudo-random number generators.
+        1.4 Using keys of sufficient length, using strong keys and protecting keys.
+
+        Use AES for encryption. Use CBC (cypher-block chaining) for symmetric algorithms.
+
+    2. Data in transit.
+    3. Data in use.
+
+        Least privilege principle: It states that only the least amount of privileges necessary to complete an action should be granted.
+        For example: if you have multiple encrypted storage containers and you need to use some data, you should only decrypt the ones that contain the data you need, rather than decrypting all the containers.
+
+        Anonymization: it means removing all the info from the data set that can be used to uniquely identify individuals describe in the data set. 
+
+        Pseudonymization: it is similar with anonymization, except instead of removing personal info, it is replaced with aliases like numbers, strings, or fictional names. When it is applied to a data set, it is still possible to distinguish individuals in the data set, but it should not be possible to link these individuals to their real-world identities.
+
+        > SSID and passphrase might be insensitive if the SSID and passphrase is not linked to any personal data.
+        > Key used in RAM should be cleared (like encryption and decryption) as soon as related actions have been done.
+
+
+#### Some best practices for attack surface analysis
+
+* Shorten the code. Remove what's not necessary.
+* Reduce the number of entry points available to anonymous or untrusted users.
+* Remove any privileges that are not explicitly required by the application.
+
+#### OWASP 2017 Top10 mitigation
+
+
+#### Thread modelling basics
+
+* Thread modelling process includes: identify security objectives --> create an application overview --> decompose your application --> identify threats --> identify vulnerabilities --> application overview. It is a iterative process and could be enhanced at run-time.
+
+1. Security objectives could be categorized using: Confidentiality, Integrity and Availability.
+    > Availability: ensures that users are always able to access a system. E.g., server uptime under attack and DoS resistance.
+
+    Examples of objectives include `Prevent attackers from obtaining data`, `Meet service-level agreements` and `Protect the company's credibility`.
+
+2. To create an application overview:
+    2.1 Could start with end-to-end deployment diagram. Like network topology and interfaces.
+    2.2 Add logical layers. Refine the diagram to include physical server boundaries when known.
+    2.3 Role identification in the diagram. Like who is able to access which data.
+    2.4 Well scope the project.
+    2.5 List the tech and key features of the software and platforms.
+    2.6 There are some aspects of security mechanisms to be referred to: Input and Data Validation, Authentication, Authorization, Configuration Management, Session Management, Cryptography, Sensitive Data Handling, Parameter Manipulation, Exception Management and Auditing and Logging.
+
+3. To decompose your application:
+    3.1 Identify Trust Boundaries.
+    3.2 Identify Data Flows.
+    3.3 Identify Entry Points.
+    3.4 Identify Exit Points.
+
+4. To identify threats:
+    Communicate with different roles in the project like architects, developers and testers. Usually the following aspects will be considered:
+
+    4.1 Common Threats.
+    4.2 Threats Along Use Cases.
+    4.3 Threats Along Data Flows.
+
+5. To identify vulnerabilities:
+    Examining the application layer-by-layer based on the identified threats.
+
+Key contents in a report/documentation could include: security objectives, key scenarios, protected resources, threat list and vulnerability list.
+
+#### Privacy by Design
+
+
