@@ -234,6 +234,62 @@ Usually use a hash function to hash the whole file to produce a certain length o
 
 Key contents in a report/documentation could include: security objectives, key scenarios, protected resources, threat list and vulnerability list.
 
-#### Privacy by Design
 
+#### Fundamentals of IoT Architecture and Design
+
+Think of two classes to categorize security requirements:
+    * User access.
+        1. How can users access IoT system? Via cloud, device or Mobile App.
+        2. What is the user's classification? Resources and services? Changes to info? Features and functions?
+        3. What type of security screenings are required? Passwords or pins? Tokens or certs?
+    * External device access.
+        1. What types of devices can connect to the system? Mobile? Diagnostic tools? IoT devices?
+        2. How can devices connect to the IoT system? Wireless?
+        3. What is the device's classification? Query info? Features and functions?
+        4. What type of security screenings are required? Tokens or cert? Dongles?
+
+Characteristics are needed for securing remote access:
+
+    * How long should an active session last?
+    * When should session configuration occur?
+    * How dynamic are sessions between devices?
+    * Should there be different standards of secure remote access?
+
+
+Application security (AppSec) implications:
+
+    * During the requirements and design phases, determine how IoT system components interact with outside entities
+        1. Software tampering
+        2. Configuration management
+        3. Session management
+        4. Exception management
+
+    * Design the processes necessary to detect and handle these categories
+    * Factor in the capability to allow for future updates
+    * Review what external support parameters are required to configure these processes
+        1. Where stored
+        2. How distributed and updated
+    
+    * Determine what levels of performance are expected between the cloud and IoT devices and between IoT devices themselves.
+    * Minimize the number of intervening layers between detection and handling while processing remote access requests.
+
+
+General rules to follow for cryptographic storage include:
+    * Only store sensitive data that you need.
+    * Use strong approved authenticated encryption that:
+        a. Uses approved cryptographic modes.
+        b. Uses strong random numbers.
+        c. Uses authenticated encryption of data.
+    * Store a one-way and salted value of passwords.
+    * Ensure that the cryptographic protection remains even if access control fails. 
+    * Ensure that any secret key is protected from unauthorized access that:
+        a. Defines a key lifecycle
+        b. Stores unencrypted keys away from the encrypted data
+        c. Uses independent keys when multiple keys are required
+        d. Protests keys in a key vault
+        e. Documents concrete procedures for managing keys through lifecycle
+        f. Builds support for changing algorithms and keys when needed
+        g. Documents concrete procedures to handle a key compromise
+        h. Limits quantity of data encrypted with one key
+    * Follow applicable regulations on use of cryptography, such as under PCI DSS requirement 3, you must protect cardholder data.
 
