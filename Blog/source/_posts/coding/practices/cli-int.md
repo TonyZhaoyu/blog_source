@@ -2,7 +2,7 @@
 title: CLI interactions
 date: 2018-09-12 14:09:59
 categories:
-- [Coding, Practices, CLI interactions]
+- [Coding, Practices]
 ---
 
 This article provides a very simple implementation of CLI interaction. The code basically shows how to leverage 'string' functions of libc. Notice the implementation of handler functions (e.g., cmd_start_scan) are omitted. The following code could be running in a thread.

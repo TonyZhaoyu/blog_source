@@ -2,7 +2,7 @@
 title: TCP Socket
 date: 2018-09-12 14:11:20
 categories:
-- [Coding, Practices, TCP Socket]
+- [Coding, Practices]
 ---
 
 This article presents a simple of using IP socket in Unix. The code has been taken from one of my projects, which was cooperated with Silicon Labs' EmberZNet App framework. It implements a socket client, and has been tested using a Node.js based server.

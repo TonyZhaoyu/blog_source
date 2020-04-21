@@ -2,7 +2,7 @@
 title: Techniques in C and compiler
 date: 2018-08-13 11:52:06
 categories:
-- [Coding, C Knowledge Base, Malloc an array of pointers]
+- [Coding, C Knowledge Base]
 ---
 
 #### **Malloc an array of pointers**
@@ -24,6 +24,18 @@ Here's the code of mallocin' the array.
 #define ARRAY_SIZE (5)
 
 testStructPtr * array = (testStructPtr *)malloc(ARRAY_SIZE * sizeof(testStructPtr));
+```
+
+***
+
+#### **GCC - linker example**
+
+Link: https://stackoverflow.com/questions/8835108/how-to-specify-non-default-shared-library-path-in-gcc-linux-getting-error-whil
+
+For example, all the shared library and the test file are in the same folder.
+
+```bash
+$ gcc -Wall test_basics.c -o test -L./ -lcmocka -Wl,-rpath=./
 ```
 
 ***

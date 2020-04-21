@@ -1,8 +1,8 @@
 ---
-title: Basics in C programming
+title: C basics dig-in
 date: 2019-02-05 14:16:31
 categories:
-- [Coding, C Knowledge Base, Rethink sizeof and strlen]
+- [Coding, C Knowledge Base]
 ---
 
 #### **Rethink sizeof() and strlen()**
@@ -217,18 +217,6 @@ int strlen(char *s)
 ```
 
 When using this function, please pay extra care about the string being passed to the method. Make sure the string ends with *'\0'*, otherwise it may crash the program or return a nonsense value.
-
-***
-
-#### **GCC - linker example**
-
-Link: https://stackoverflow.com/questions/8835108/how-to-specify-non-default-shared-library-path-in-gcc-linux-getting-error-whil
-
-For example, all the shared library and the test file are in the same folder.
-
-```bash
-$ gcc -Wall test_basics.c -o test -L./ -lcmocka -Wl,-rpath=./
-```
 
 ***
 

@@ -2,7 +2,7 @@
 title: A crash-course of using Cmocka
 date: 2018-09-20 13:09:17
 categories:
-- [Coding, Practices, Cmocka crash-course]
+- [Coding, Practices]
 ---
 
 Unit testing is not just value validation using assertions. An important testing technique, namely mock, should be equally addressed. Cmocka provides a test framework of conducting mock features. The following content serves as a summary of two related links (https://blog.microjoe.org/2017/unit-tests-c-cmocka-coverage-cmake.html#assert-functions and https://lwn.net/Articles/558106/), targeting to clarify the concept of mock and the usage of Cmocka.

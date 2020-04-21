@@ -1,8 +1,8 @@
 ---
-title: Embedded hardware interfaces for communications
+title: Embedded Hardware Tutorials
 date: 2019-12-17 10:36:06
 categories:
-- [Book notes, Embedded HW, Communication interface]
+- [Book notes, Tutorials]
 ---
 
 #### **UART communication**

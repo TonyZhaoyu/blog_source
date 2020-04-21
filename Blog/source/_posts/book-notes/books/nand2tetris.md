@@ -2,7 +2,7 @@
 title: The Element of Computing Systems (aka., Nand2tetris)
 date: 2018-08-14 17:01:04
 categories:
-- [Book notes, CPU, Nand2tetris]
+- [Book notes, Books]
 ---
 
 #### Nand2Tetris reference book

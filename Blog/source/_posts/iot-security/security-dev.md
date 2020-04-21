@@ -112,7 +112,6 @@ Best practices to handle TLC certs:
     * Use RSA or DSA key > 2048 bits
 
 
-
 #### Development of secured embedded software
 
 Some memory issues:

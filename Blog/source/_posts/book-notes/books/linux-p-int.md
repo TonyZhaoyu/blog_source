@@ -2,7 +2,7 @@
 title: The Linux programming interface
 date: 2018-08-16 09:21:16
 categories:
-- [Book notes, Embedded SW, The Linux programming interface]
+- [Book notes, Books]
 ---
 
 #### The Linux programming interface (TLPI)

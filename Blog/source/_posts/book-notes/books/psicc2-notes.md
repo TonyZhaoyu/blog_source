@@ -2,7 +2,7 @@
 title: PSiCC2
 date: 2018-05-29 10:39:45
 categories:
-- [Book notes, Embedded SW, QP framework]
+- [Book notes, Books]
 ---
 
 #### QP framework reference (PSICC2)

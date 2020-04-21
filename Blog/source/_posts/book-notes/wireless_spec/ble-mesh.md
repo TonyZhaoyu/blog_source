@@ -1,8 +1,8 @@
 ---
-title: Bluetooth Mesh specification
+title: Bluetooth Mesh specification & usage
 date: 2019-12-21 10:11:30
 categories:
-- [Book notes, Spec, BLE-Mesh Spec]
+- [Book notes, Wireless Protocol Spec]
 ---
 
 #### BLE-Mesh spec reference

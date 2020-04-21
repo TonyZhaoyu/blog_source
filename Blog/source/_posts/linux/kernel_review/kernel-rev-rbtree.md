@@ -1,8 +1,8 @@
 ---
-title: Kernel review - red-black tree
+title: Red-black tree
 date: 2018-11-07 10:22:08
 categories:
-- [Linux, Kernel Review, Red-black tree]
+- [Linux, Kernel Review]
 ---
 
 #### **Red-black tree AKA. rbTree**
